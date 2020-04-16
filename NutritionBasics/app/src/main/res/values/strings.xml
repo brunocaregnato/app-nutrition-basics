@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">NutritionBasics</string>
-    <string name="drawerOpen">drawerOpen</string>
-    <string name="drawerClose">drawerClose</string>
 </resources>
