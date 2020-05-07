@@ -2,4 +2,15 @@
     <string name="app_name">NutritionBasics</string>
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
+
+    <string-array name="sexs">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    
+    <string-array name="activitiesLevels">
+        <item>Sedentary or Perform few activities</item>
+        <item>Active or Moderately active</item>
+        <item>Very Active</item>
+    </string-array>
 </resources>

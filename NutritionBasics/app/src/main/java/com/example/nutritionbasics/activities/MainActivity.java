@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new Home()).commit();
                 break;
             case R.id.profile:
-                Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_LONG).show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Profile()).commit();
                 break;

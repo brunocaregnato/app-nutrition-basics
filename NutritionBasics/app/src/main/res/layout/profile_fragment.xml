@@ -5,11 +5,74 @@
     android:background="@color/c1">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Profile Fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="Profile"
         android:textSize="30sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:hint="Name" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/height"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="170dp"
+        android:hint="Height" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/weight"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="240dp"
+        android:hint="Weight" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/birthday"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="310dp"
+        android:hint="Date of Birth" />
+
+    <TextView
+        android:id="@+id/textSex"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="375dp"
+        android:text="Sex:" />
+
+    <Spinner
+        android:id="@+id/sex"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="405dp">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/textActivityLevel"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="left|center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="455dp"
+        android:text="Activity Level:" />
+
+    <Spinner
+        android:id="@+id/activityLevel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="485dp">
+    </Spinner>
+
 </RelativeLayout>
 
  
