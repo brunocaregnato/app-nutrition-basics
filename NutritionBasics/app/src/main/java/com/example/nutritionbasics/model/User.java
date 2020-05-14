@@ -1,27 +1,29 @@
 package com.example.nutritionbasics.model;
 
-public class Usuario {
+import java.util.Date;
+
+public class User {
 
     private int id;
     private String name;
-    private String   birthdate;
+    private String birthday;
     private float  height;
-    private int    weight;
-    private int    activityLevel;
-    private int    sex;
-    private float  calorias;
+    private int weight;
+    private int activityLevel;
+    private int sex;
+    private float calories;
 
-    public Usuario() { }
+    public User() { }
 
-    public Usuario(int id, String name, String birthdate, float height, int weight, int activityLevel, int sex, float calorias) {
+    public User(int id, String name, String birthday, float height, int weight, int activityLevel, int sex, float calories) {
         this.id = id;
         this.name = name;
-        this.birthdate = birthdate;
+        this.birthday = birthday;
         this.height = height;
         this.weight = weight;
         this.activityLevel = activityLevel;
         this.sex = sex;
-        this.calorias = calorias;
+        this.calories = calories;
     }
 
     //GETTERS
@@ -33,8 +35,8 @@ public class Usuario {
         return name;
     }
 
-    public String getBirthdate() {
-        return birthdate;
+    public String getBirthday() {
+        return birthday;
     }
 
     public float getHeight() {
@@ -53,8 +55,8 @@ public class Usuario {
         return sex;
     }
 
-    public float getCalorias() {
-        return calorias;
+    public float getCalories() {
+        return calories;
     }
 
     //SETTERS
@@ -66,8 +68,8 @@ public class Usuario {
         this.name = name;
     }
 
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public void setHeight(float height) {
@@ -86,8 +88,8 @@ public class Usuario {
         this.sex = sex;
     }
 
-    public void setCalorias(float calorias) {
-        this.calorias = calorias;
+    public void setCalories(float calories) {
+        this.calories = calories;
     }
 
 }
