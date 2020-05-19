@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,16 +13,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.nutritionbasics.R;
 import com.example.nutritionbasics.banco.BDuser;
 import com.example.nutritionbasics.model.User;
-import com.google.android.material.navigation.NavigationView;
 import java.util.Calendar;
 
-public class Profile extends Fragment implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class Profile extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private EditText birthday;
     private DatePickerDialog picker;
@@ -101,11 +98,14 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
                 else if(activitylevel.getSelectedItem().toString().toUpperCase().startsWith("A")) activityLevel = 1;
                 else activityLevel = 2;
                 userProfile.setActivityLevel(activityLevel);
+                userProfile.setCalories();
 
                 if(user != null) bd.updateUser(userProfile);
                 else bd.addUser(userProfile);
 
+                //Redireciona para o fragment home
                 Toast.makeText(getActivity().getApplicationContext(), "Profile Updated Successfully ", Toast.LENGTH_LONG).show();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
             }
         });
 
@@ -120,10 +120,5 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //do whatever
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
     }
 }

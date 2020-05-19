@@ -1,5 +1,6 @@
 package com.example.nutritionbasics.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class User {
@@ -12,11 +13,11 @@ public class User {
     private int activityLevel;
     private int sex;
 
-    private float calories;
+    private double calories;
 
     public User() { }
 
-    public User(int id, String name, String birthday, int height, int weight, int activityLevel, int sex, float calories) {
+    public User(int id, String name, String birthday, int height, int weight, int activityLevel, int sex, double calories) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -54,7 +55,7 @@ public class User {
         return sex;
     }
 
-    public float getCalories() {
+    public double getCalories() {
         return calories;
     }
 
@@ -83,8 +84,31 @@ public class User {
         this.sex = sex;
     }
 
-    public void setCalories(float calories) {
-        this.calories = calories;
+    public void setCalories() { this.calories = CalculateBMR(); }
+
+    private double CalculateBMR(){
+        double bmr = (10 * getWeight()) + (6.25 * getWeight()) - (5 * getAge());
+        switch (getSex()){
+            case 0: bmr += 5;
+                    break;
+            case 1: bmr -= 161;
+        }
+        switch (getActivityLevel()){
+            case 0: bmr *= 1.53;
+                    break;
+            case 1: bmr *= 1.76;
+                    break;
+            case 2: bmr *= 2.25;
+                    break;
+        }
+
+        return bmr;
     }
+
+    private int getAge(){
+        Calendar today = Calendar.getInstance();
+        return today.get(Calendar.YEAR) - Integer.parseInt(this.birthday.substring(6));
+    }
+
 
 }

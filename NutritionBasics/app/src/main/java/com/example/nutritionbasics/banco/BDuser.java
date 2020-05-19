@@ -40,7 +40,7 @@ public class BDuser extends SQLiteOpenHelper {
                 "weight INTEGER,"+
                 "activitylevel INTEGER,"+
                 "sex INTEGER,"+
-                "calorias FLOAT)";
+                "calorias DOUBLE)";
         db.execSQL(CREATE_TABLE);
     }
 
@@ -101,7 +101,6 @@ public class BDuser extends SQLiteOpenHelper {
         user.setWeight(Integer.parseInt(cursor.getString(4)));
         user.setActivityLevel(Integer.parseInt(cursor.getString(5)));
         user.setSex(Integer.parseInt(cursor.getString(6)));
-        user.setCalories(Float.parseFloat(cursor.getString(7)));
         return user;
     }
 
@@ -114,7 +113,7 @@ public class BDuser extends SQLiteOpenHelper {
         values.put(WEIGHT, new Integer(user.getWeight()));
         values.put(ACTIVITYLEVEL, new Integer(user.getActivityLevel()));
         values.put(SEX, new Integer(user.getSex()));
-        values.put(CALORIAS, new Float(user.getCalories()));
+        values.put(CALORIAS, new Double(user.getCalories()));
         int i = db.update(TABLE_USUARIO, //tabela
                 values, // valores
                 ID+" = ?", // colunas para comparar
