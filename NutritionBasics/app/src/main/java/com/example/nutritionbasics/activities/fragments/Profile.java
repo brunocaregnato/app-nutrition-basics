@@ -1,10 +1,10 @@
 package com.example.nutritionbasics.activities.fragments;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,25 +14,21 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
-
 import com.example.nutritionbasics.R;
-import com.example.nutritionbasics.activities.MainActivity;
 import com.example.nutritionbasics.banco.BDuser;
 import com.example.nutritionbasics.model.User;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import com.google.android.material.navigation.NavigationView;
 import java.util.Calendar;
 
-public class Profile extends Fragment implements AdapterView.OnItemSelectedListener {
+public class Profile extends Fragment implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     private EditText birthday;
     private DatePickerDialog picker;
     private BDuser bd;
+    private User user;
 
     @Nullable
     @Override
@@ -52,7 +48,7 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
         spinnerActivity.setAdapter(adapter);
         spinnerActivity.setOnItemSelectedListener(this);
 
-        User user = bd.getUser(0);
+        user = bd.getUser();
 
         final EditText name = (EditText) view.findViewById(R.id.name);
         final EditText weight = (EditText) view.findViewById(R.id.weight);
@@ -65,6 +61,7 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
             name.setText(user.getName());
             weight.setText(String.valueOf(user.getWeight()));
             height.setText(String.valueOf(user.getHeight()));
+            userBirthday.setText(user.getBirthday());
             sex.setSelection(user.getSex());
             activitylevel.setSelection(user.getActivityLevel());
         }
@@ -98,14 +95,17 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
                 userProfile.setWeight(Integer.parseInt(weight.getText().toString()));
                 userProfile.setHeight(Integer.parseInt(height.getText().toString()));
                 userProfile.setBirthday(userBirthday.getText().toString());
-                userProfile.setSex(sex.getSelectedItem().toString().toUpperCase().equals("MALE") ? 1 : 2);
+                userProfile.setSex(sex.getSelectedItem().toString().toUpperCase().equals("MALE") ? 0 : 1);
                 int activityLevel;
-                if (activitylevel.getSelectedItem().toString().toUpperCase().startsWith("S")) activityLevel = 1;
-                else if(activitylevel.getSelectedItem().toString().toUpperCase().startsWith("A")) activityLevel = 2;
-                else activityLevel = 3;
+                if (activitylevel.getSelectedItem().toString().toUpperCase().startsWith("S")) activityLevel = 0;
+                else if(activitylevel.getSelectedItem().toString().toUpperCase().startsWith("A")) activityLevel = 1;
+                else activityLevel = 2;
                 userProfile.setActivityLevel(activityLevel);
 
-                bd.updateUser(userProfile);
+                if(user != null) bd.updateUser(userProfile);
+                else bd.addUser(userProfile);
+
+                Toast.makeText(getActivity().getApplicationContext(), "Profile Updated Successfully ", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -120,5 +120,10 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //do whatever
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }

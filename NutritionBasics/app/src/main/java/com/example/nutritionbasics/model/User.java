@@ -7,15 +7,16 @@ public class User {
     private int id;
     private String name;
     private String birthday;
-    private float  height;
+    private int  height;
     private int weight;
     private int activityLevel;
     private int sex;
+
     private float calories;
 
     public User() { }
 
-    public User(int id, String name, String birthday, float height, int weight, int activityLevel, int sex, float calories) {
+    public User(int id, String name, String birthday, int height, int weight, int activityLevel, int sex, float calories) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -27,9 +28,7 @@ public class User {
     }
 
     //GETTERS
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public String getName() {
         return name;
@@ -39,7 +38,7 @@ public class User {
         return birthday;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 
@@ -60,9 +59,7 @@ public class User {
     }
 
     //SETTERS
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
     public void setName(String name) {
         this.name = name;
@@ -72,9 +69,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    public void setHeight(float height) {
-        this.height = height;
-    }
+    public void setHeight(int height) { this.height = height; }
 
     public void setWeight(int weight) {
         this.weight = weight;

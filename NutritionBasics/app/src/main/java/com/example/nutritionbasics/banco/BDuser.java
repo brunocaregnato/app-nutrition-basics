@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class BDuser extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "userDB";
     private static final String TABLE_USUARIO = "usuario";
     private static final String ID = "id";
@@ -36,7 +36,7 @@ public class BDuser extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "name TEXT,"+
                 "birthday DATE,"+
-                "height FLOAT,"+
+                "height INTEGER,"+
                 "weight INTEGER,"+
                 "activitylevel INTEGER,"+
                 "sex INTEGER,"+
@@ -53,6 +53,7 @@ public class BDuser extends SQLiteOpenHelper {
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(ID, 1);
         values.put(NAME, user.getName());
         values.put(BIRTHDAY, user.getBirthday());
         values.put(HEIGHT, user.getHeight());
@@ -68,7 +69,7 @@ public class BDuser extends SQLiteOpenHelper {
         return DatabaseUtils.queryNumEntries(db, TABLE_USUARIO) > 0;
     }
 
-    public User getUser(int id) {
+    public User getUser() {
         SQLiteDatabase db = this.getReadableDatabase();
 
         if (!hasUser(db)) return null;
@@ -76,14 +77,15 @@ public class BDuser extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_USUARIO, // a. tabela
                 COLUNAS, // b. colunas
                 " id = ?", // c. colunas para comparar
-                new String[] { String.valueOf(id) }, // d. parâmetros
+                new String[] { String.valueOf(1) }, // d. parâmetros
                 null, // e. group by
                 null, // f. having
                 null, // g. order by
                 null); // h. limit
         if (cursor == null) {
             return null;
-        } else {
+        }
+        else {
             cursor.moveToFirst();
             User user = cursorToUser(cursor);
             return user;
@@ -95,7 +97,7 @@ public class BDuser extends SQLiteOpenHelper {
         user.setId(Integer.parseInt(cursor.getString(0)));
         user.setName(cursor.getString(1));
         user.setBirthday(cursor.getString(2));
-        user.setHeight(Float.parseFloat(cursor.getString(3)));
+        user.setHeight(Integer.parseInt(cursor.getString(3)));
         user.setWeight(Integer.parseInt(cursor.getString(4)));
         user.setActivityLevel(Integer.parseInt(cursor.getString(5)));
         user.setSex(Integer.parseInt(cursor.getString(6)));
@@ -108,7 +110,7 @@ public class BDuser extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(NAME, user.getName());
         values.put(BIRTHDAY, user.getBirthday());
-        values.put(HEIGHT, new Float(user.getHeight()));
+        values.put(HEIGHT, new Integer(user.getHeight()));
         values.put(WEIGHT, new Integer(user.getWeight()));
         values.put(ACTIVITYLEVEL, new Integer(user.getActivityLevel()));
         values.put(SEX, new Integer(user.getSex()));
@@ -116,7 +118,7 @@ public class BDuser extends SQLiteOpenHelper {
         int i = db.update(TABLE_USUARIO, //tabela
                 values, // valores
                 ID+" = ?", // colunas para comparar
-                new String[] { String.valueOf(user.getId()) }); //parâmetros
+                new String[] { String.valueOf(1) }); //parâmetros
         db.close();
         return i; // número de linhas modificadas
     }
