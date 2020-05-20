@@ -14,10 +14,14 @@ public class User {
     private int sex;
 
     private double calories;
+    private double proteins;
+    private double carbohydrates;
+    private double fat;
 
     public User() { }
 
-    public User(int id, String name, String birthday, int height, int weight, int activityLevel, int sex, double calories) {
+    public User(int id, String name, String birthday, int height, int weight, int activityLevel, int sex, double calories,
+                double proteins, double carbohydrates, double fat) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -26,6 +30,9 @@ public class User {
         this.activityLevel = activityLevel;
         this.sex = sex;
         this.calories = calories;
+        this.proteins = proteins;
+        this.carbohydrates = carbohydrates;
+        this.fat = fat;
     }
 
     //GETTERS
@@ -59,6 +66,12 @@ public class User {
         return calories;
     }
 
+    public double getProteins() { return proteins; }
+
+    public double getCarbohydrates() { return carbohydrates; }
+
+    public double getFat() { return fat; }
+
     //SETTERS
     public void setId(int id) { this.id = id; }
 
@@ -84,7 +97,12 @@ public class User {
         this.sex = sex;
     }
 
-    public void setCalories() { this.calories = CalculateBMR(); }
+    public void setCalories(double calories) {
+        if (calories > 0) this.calories = calories;
+        else this.calories = CalculateBMR();
+
+        calculateMacros(this.calories);
+    }
 
     private double CalculateBMR(){
         double bmr = (10 * getWeight()) + (6.25 * getWeight()) - (5 * getAge());
@@ -110,5 +128,10 @@ public class User {
         return today.get(Calendar.YEAR) - Integer.parseInt(this.birthday.substring(6));
     }
 
+    private void calculateMacros(double calories) {
+        this.proteins = (calories * 27) / 100;
+        this.carbohydrates = (calories * 50) / 100;;
+        this.fat = (calories * 23) / 100;;
+    }
 
 }

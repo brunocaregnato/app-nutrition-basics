@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class BDuser extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "userDB";
     private static final String TABLE_USUARIO = "usuario";
     private static final String ID = "id";
@@ -23,8 +23,8 @@ public class BDuser extends SQLiteOpenHelper {
     private static final String WEIGHT = "weight";
     private static final String ACTIVITYLEVEL= "activitylevel";
     private static final String SEX = "sex";
-    private static final String CALORIAS = "calorias";
-    private static final String[] COLUNAS = { ID, NAME, BIRTHDAY, HEIGHT, WEIGHT, ACTIVITYLEVEL, SEX, CALORIAS };
+    private static final String CALORIES = "calories";
+    private static final String[] COLUNAS = { ID, NAME, BIRTHDAY, HEIGHT, WEIGHT, ACTIVITYLEVEL, SEX, CALORIES };
 
     public BDuser(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,7 +40,7 @@ public class BDuser extends SQLiteOpenHelper {
                 "weight INTEGER,"+
                 "activitylevel INTEGER,"+
                 "sex INTEGER,"+
-                "calorias DOUBLE)";
+                "calories DOUBLE)";
         db.execSQL(CREATE_TABLE);
     }
 
@@ -60,7 +60,7 @@ public class BDuser extends SQLiteOpenHelper {
         values.put(WEIGHT, user.getWeight());
         values.put(ACTIVITYLEVEL, user.getActivityLevel());
         values.put(SEX, user.getSex());
-        values.put(CALORIAS, user.getCalories());
+        values.put(CALORIES, user.getCalories());
         db.insert(TABLE_USUARIO, null, values);
         db.close();
     }
@@ -101,6 +101,7 @@ public class BDuser extends SQLiteOpenHelper {
         user.setWeight(Integer.parseInt(cursor.getString(4)));
         user.setActivityLevel(Integer.parseInt(cursor.getString(5)));
         user.setSex(Integer.parseInt(cursor.getString(6)));
+        user.setCalories(Double.parseDouble(cursor.getString(7)));
         return user;
     }
 
@@ -113,21 +114,12 @@ public class BDuser extends SQLiteOpenHelper {
         values.put(WEIGHT, new Integer(user.getWeight()));
         values.put(ACTIVITYLEVEL, new Integer(user.getActivityLevel()));
         values.put(SEX, new Integer(user.getSex()));
-        values.put(CALORIAS, new Double(user.getCalories()));
+        values.put(CALORIES, new Double(user.getCalories()));
         int i = db.update(TABLE_USUARIO, //tabela
                 values, // valores
                 ID+" = ?", // colunas para comparar
                 new String[] { String.valueOf(1) }); //parâmetros
         db.close();
         return i; // número de linhas modificadas
-    }
-
-    public int deleteUsuario(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        int i = db.delete(TABLE_USUARIO, //tabela
-                ID+" = ?", // colunas para comparar
-                new String[] { String.valueOf(user.getId()) });
-        db.close();
-        return i; // número de linhas excluídas
     }
 }

@@ -98,7 +98,7 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
                 else if(activitylevel.getSelectedItem().toString().toUpperCase().startsWith("A")) activityLevel = 1;
                 else activityLevel = 2;
                 userProfile.setActivityLevel(activityLevel);
-                userProfile.setCalories();
+                userProfile.setCalories(0);
 
                 if(user != null) bd.updateUser(userProfile);
                 else bd.addUser(userProfile);
