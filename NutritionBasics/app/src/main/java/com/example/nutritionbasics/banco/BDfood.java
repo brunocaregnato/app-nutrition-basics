@@ -3,13 +3,17 @@ package com.example.nutritionbasics.banco;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.nutritionbasics.model.Food;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BDfood extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "foodDB";
     private static final String TABLE_FOOD = "food";
     private static final String ID = "id";
@@ -52,17 +56,33 @@ public class BDfood extends SQLiteOpenHelper {
                 "protein FLOAT," +
                 "carbohydrate FLOAT)";
         db.execSQL(CREATE_TABLE);
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS food");
         this.onCreate(db);
+
+        /*if(oldVersion != newVersion) {
+            List<Food> _food = new ArrayList<>();
+            //int id, String foodName, int calories, int weight, float vitaminB, float vitaminD, float vitaminA, float vitaminC, float vitaminE, float calcium, float iron, float zinc, float fat, float protein, float carbohydrate) {
+            _food.add(new Food(1, "Pears", 57, 350, 0, 0, 0, 0, 0, 0, 0, 0, 0.14, 0.36, 15.23));
+            _food.add(new Food(2, "Cucumber", 15, 1333, 0, 0, 0, 0, 0, 0, 0, 0, 0.11, 0.65, 3.63));
+            _food.add(new Food(3, "Bacon (Raw)", 393, 50, 0, 0, 0, 0, 0, 0, 0, 0, 37.13, 13.66, 0));
+
+            for (int x = 0; x < _food.size(); x++) {
+                addFood(_food.get(x));
+            }
+        }*/
+
     }
 
     public void addFood(Food food) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(ID, food.getId());
         values.put(FOOD_NAME, food.getFoodName());
         values.put(CALORIES, food.getCalories());
         values.put(WEIGHT, food.getWeight());
@@ -81,8 +101,15 @@ public class BDfood extends SQLiteOpenHelper {
         db.close();
     }
 
+    private boolean hasFood(SQLiteDatabase db){
+        return DatabaseUtils.queryNumEntries(db, TABLE_FOOD) > 0;
+    }
+
     public Food getFood(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
+
+        if (!hasFood(db)) return null;
+
         Cursor cursor = db.query(TABLE_FOOD, // a. tabela
                 COLUNAS, // b. colunas
                 " id = ?", // c. colunas para comparar
@@ -104,8 +131,8 @@ public class BDfood extends SQLiteOpenHelper {
         Food food = new Food();
         food.setId(Integer.parseInt(cursor.getString(0)));
         food.setFoodName(cursor.getString(1));
-        food.setCalories(Integer.parseInt(cursor.getString(2)));
-        food.setWeight(Integer.parseInt(cursor.getString(3)));
+        food.setCalories(Double.parseDouble(cursor.getString(2)));
+        food.setWeight(Double.parseDouble(cursor.getString(3)));
         food.setVitaminB(Float.parseFloat(cursor.getString(4)));
         food.setVitaminD(Float.parseFloat(cursor.getString(5)));
         food.setVitaminA(Float.parseFloat(cursor.getString(6)));
@@ -114,9 +141,9 @@ public class BDfood extends SQLiteOpenHelper {
         food.setCalcium(Float.parseFloat(cursor.getString(9)));
         food.setIron(Float.parseFloat(cursor.getString(10)));
         food.setZinc(Float.parseFloat(cursor.getString(11)));
-        food.setFat(Float.parseFloat(cursor.getString(12)));
-        food.setProtein(Float.parseFloat(cursor.getString(13)));
-        food.setCarbohydrate(Float.parseFloat(cursor.getString(14)));
+        food.setFat(Double.parseDouble(cursor.getString(12)));
+        food.setProtein(Double.parseDouble(cursor.getString(13)));
+        food.setCarbohydrate(Double.parseDouble(cursor.getString(14)));
         return food;
     }
 
@@ -124,8 +151,8 @@ public class BDfood extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(FOOD_NAME, food.getFoodName());
-        values.put(CALORIES, new Integer(food.getCalories()));
-        values.put(WEIGHT, new Integer(food.getWeight()));
+        values.put(CALORIES, new Double(food.getCalories()));
+        values.put(WEIGHT, new Double(food.getWeight()));
         values.put(VITAMINB, new Float(food.getVitaminB()));
         values.put(VITAMIND, new Float(food.getVitaminD()));
         values.put(VITAMINA, new Float(food.getVitaminA()));
@@ -134,9 +161,9 @@ public class BDfood extends SQLiteOpenHelper {
         values.put(CALCIUM, new Float(food.getCalcium()));
         values.put(IRON, new Float(food.getIron()));
         values.put(ZINC, new Float(food.getZinc()));
-        values.put(FAT, new Float(food.getFat()));
-        values.put(PROTEIN, new Float(food.getProtein()));
-        values.put(CARBOHYDRATE, new Float(food.getCarbohydrate()));
+        values.put(FAT, new Double(food.getFat()));
+        values.put(PROTEIN, new Double(food.getProtein()));
+        values.put(CARBOHYDRATE, new Double(food.getCarbohydrate()));
         int i = db.update(TABLE_FOOD, //tabela
                 values, // valores
                 ID+" = ?", // colunas para comparar

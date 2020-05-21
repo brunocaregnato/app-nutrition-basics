@@ -8,10 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.nutritionbasics.model.Meal;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class BDmeal  extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "mealDB";
     private static final String TABLE_MEAL = "meal";
     private static final String ID = "id";
@@ -34,7 +37,7 @@ public class BDmeal  extends SQLiteOpenHelper {
                 "food INTEGER,"+
                 "mealtitle TEXT,"+
                 "observation TEXT,"+
-                "totalcalories FLOAT)";
+                "totalcalories DOUBLE)";
         db.execSQL(CREATE_TABLE);
     }
 
@@ -82,7 +85,7 @@ public class BDmeal  extends SQLiteOpenHelper {
         meal.setFood(Integer.parseInt(cursor.getString(2)));
         meal.setMealtitle(cursor.getString(3));
         meal.setObservation(cursor.getString(4));
-        meal.setTotalcalories(Float.parseFloat(cursor.getString(5)));
+        meal.setTotalcalories(Double.parseDouble(cursor.getString(5)));
         return meal;
     }
 
@@ -93,7 +96,7 @@ public class BDmeal  extends SQLiteOpenHelper {
         values.put(FOOD, new Integer(meal.getFood()));
         values.put(MEALTITLE, meal.getMealtitle());
         values.put(OBSERVATION, meal.getObservation());
-        values.put(TOTALCALORIES, new Float(meal.getTotalcalories()));
+        values.put(TOTALCALORIES, new Double(meal.getTotalcalories()));
         int i = db.update(TABLE_MEAL, //tabela
                 values, // valores
                 ID+" = ?", // colunas para comparar
@@ -109,5 +112,39 @@ public class BDmeal  extends SQLiteOpenHelper {
                 new String[] { String.valueOf(meal.getId()) });
         db.close();
         return i; // número de linhas excluídas
+    }
+
+
+    public List<Meal> getAllMealDay() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Cursor cursor = db.query(TABLE_MEAL, // a. tabela
+                COLUNAS, // b. colunas
+                " d_date = ?", // c. colunas para comparar
+                new String[] { sdf.format(new Date()) }, // d. parâmetros
+                //new String[] { String.valueOf(id) }, // d. parâmetros
+                null, // e. group by
+                null, // f. having
+                null); // h. limit
+        if (cursor == null) {
+            return null;
+        } else {
+            List<Meal> meal = new ArrayList<>();
+            if (cursor.moveToFirst()) {
+                do {
+                    Meal _meal = new Meal();
+                    _meal.setId(Integer.parseInt(cursor.getString(0)));
+                    _meal.setD_date(cursor.getString(1));
+                    _meal.setFood(Integer.parseInt(cursor.getString(2)));
+                    _meal.setMealtitle(cursor.getString(3));
+                    _meal.setObservation(cursor.getString(4));
+                    _meal.setTotalcalories(Double.parseDouble(cursor.getString(5)));
+                    // Adding contact to list
+                    meal.add(_meal);
+                } while (cursor.moveToNext());
+            }
+
+            return meal;
+        }
     }
 }

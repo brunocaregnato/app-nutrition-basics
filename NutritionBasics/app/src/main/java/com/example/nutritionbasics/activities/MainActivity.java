@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new Profile()).commit();
                 break;
             case R.id.registerMeal:
-                Toast.makeText(MainActivity.this, "Register Meal", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "Register Meal", Toast.LENGTH_LONG).show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new RegisterMeal()).commit();
                 break;

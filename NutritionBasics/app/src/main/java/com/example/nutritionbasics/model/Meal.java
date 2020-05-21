@@ -7,11 +7,12 @@ public class Meal {
     private int    food;
     private String mealtitle;
     private String observation;
-    private float  totalcalories;
+
+    private double  totalcalories;
 
     public Meal() { }
 
-    public Meal(int id, String d_date, int food, String mealtitle, String observation, float totalcalories) {
+    public Meal(int id, String d_date, int food, String mealtitle, String observation, double totalcalories) {
         this.id = id;
         this.d_date = d_date;
         this.food = food;
@@ -40,7 +41,7 @@ public class Meal {
         return observation;
     }
 
-    public float getTotalcalories() {
+    public double getTotalcalories() {
         return totalcalories;
     }
 
@@ -64,7 +65,7 @@ public class Meal {
         this.observation = observation;
     }
 
-    public void setTotalcalories(float totalcalories) {
+    public void setTotalcalories(double totalcalories) {
         this.totalcalories = totalcalories;
     }
 

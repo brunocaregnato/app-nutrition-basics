@@ -16,22 +16,30 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.nutritionbasics.R;
+import com.example.nutritionbasics.banco.BDfood;
 import com.example.nutritionbasics.banco.BDuser;
+import com.example.nutritionbasics.model.Food;
 import com.example.nutritionbasics.model.User;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Profile extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private EditText birthday;
     private DatePickerDialog picker;
     private BDuser bd;
+    private BDfood bdF;
     private User user;
+    private List<Food> _food;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
         bd = new BDuser(getActivity().getApplicationContext());
+        bdF = new BDfood(getActivity().getApplicationContext());
 
         Spinner spinner = view.findViewById(R.id.sex);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.sexs, android.R.layout.simple_spinner_item);
@@ -44,6 +52,24 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerActivity.setAdapter(adapter);
         spinnerActivity.setOnItemSelectedListener(this);
+
+
+
+
+
+            _food = new ArrayList<>();
+            //int id, String foodName, int calories, int weight, float vitaminB, float vitaminD, float vitaminA, float vitaminC, float vitaminE, float calcium, float iron, float zinc, float fat, float protein, float carbohydrate) {
+            _food.add(new Food(1, "Pears", 57, 350, 0, 0, 0, 0, 0, 0, 0, 0, 0.14, 0.36, 15.23));
+            _food.add(new Food(2, "Cucumber", 15, 1333, 0, 0, 0, 0, 0, 0, 0, 0, 0.11, 0.65, 3.63));
+            _food.add(new Food(3, "Bacon (Raw)", 393, 50, 0, 0, 0, 0, 0, 0, 0, 0, 37.13, 13.66, 0));
+
+            /*for (int x = 0; x < _food.size(); x++) {
+                bdF.addFood(_food.get(x));
+            }*/
+
+
+
+
 
         user = bd.getUser();
 
@@ -101,7 +127,11 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
                 userProfile.setCalories(0);
 
                 if(user != null) bd.updateUser(userProfile);
-                else bd.addUser(userProfile);
+                else { bd.addUser(userProfile);
+                    for (int x = 0; x < _food.size(); x++) {
+                        bdF.addFood(_food.get(x));
+                    }
+                }
 
                 //Redireciona para o fragment home
                 Toast.makeText(getActivity().getApplicationContext(), "Profile Updated Successfully ", Toast.LENGTH_LONG).show();

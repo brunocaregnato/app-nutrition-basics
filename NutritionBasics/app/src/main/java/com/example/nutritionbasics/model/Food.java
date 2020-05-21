@@ -4,8 +4,8 @@ public class Food {
 
     private int id;
     private String foodName;
-    private int    calories;
-    private int weight;
+    private double    calories;
+    private double weight;
     private float vitaminB;
     private float vitaminD;
     private float vitaminA;
@@ -14,9 +14,31 @@ public class Food {
     private float calcium;
     private float iron;
     private float zinc;
-    private float fat;
-    private float protein;
-    private float carbohydrate;
+    private double fat;
+    private double protein;
+    private double carbohydrate;
+
+    public Food() {
+
+    }
+
+    public Food(int id, String foodName, double calories, double weight, float vitaminB, float vitaminD, float vitaminA, float vitaminC, float vitaminE, float calcium, float iron, float zinc, double fat, double protein, double carbohydrate) {
+        this.id = id;
+        this.foodName = foodName;
+        this.calories = calories;
+        this.weight = weight;
+        this.vitaminB = vitaminB;
+        this.vitaminD = vitaminD;
+        this.vitaminA = vitaminA;
+        this.vitaminC = vitaminC;
+        this.vitaminE = vitaminE;
+        this.calcium = calcium;
+        this.iron = iron;
+        this.zinc = zinc;
+        this.fat = fat;
+        this.protein = protein;
+        this.carbohydrate = carbohydrate;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -26,11 +48,11 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(double calories) {
         this.calories = calories;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
@@ -66,15 +88,15 @@ public class Food {
         this.zinc = zinc;
     }
 
-    public void setFat(float fat) {
+    public void setFat(double fat) {
         this.fat = fat;
     }
 
-    public void setProtein(float protein) {
+    public void setProtein(double protein) {
         this.protein = protein;
     }
 
-    public void setCarbohydrate(float carbohydrate) {
+    public void setCarbohydrate(double carbohydrate) {
         this.carbohydrate = carbohydrate;
     }
 
@@ -86,11 +108,11 @@ public class Food {
         return foodName;
     }
 
-    public int getCalories() {
+    public double getCalories() {
         return calories;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -126,15 +148,15 @@ public class Food {
         return zinc;
     }
 
-    public float getFat() {
+    public double getFat() {
         return fat;
     }
 
-    public float getProtein() {
+    public double getProtein() {
         return protein;
     }
 
-    public float getCarbohydrate() {
+    public double getCarbohydrate() {
         return carbohydrate;
     }
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class BDuser extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "userDB";
     private static final String TABLE_USUARIO = "usuario";
     private static final String ID = "id";

@@ -2,14 +2,112 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/c1">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Register Meal Fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="Register Meal"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textTitleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:gravity="left|center_vertical"
+        android:text="Title meal:" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/fragment_meal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:hint="Title meal" />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/fragment_mealtitle_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textWeightMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="260dp"
+            android:gravity="left|center_vertical"
+            android:text="Weight (g):" />
+
+        <TextView
+            android:id="@+id/textDateMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="260dp"
+            android:gravity="left|center_vertical"
+            android:text="Date:" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="280dp"
+            android:hint="Weight (g)" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/fragment_weight"
+            android:layout_weight="1"
+            android:layout_marginTop="280dp"
+            android:hint="Date"
+            android:inputType="date"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textObsMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:gravity="left|center_vertical"
+        android:text="Observation:" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/fragment_observation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
+        android:inputType="textMultiLine"
+        android:lines="6"
+        android:scrollbars="vertical"
+        android:hint="Observation   " />
+
+    <Button
+        android:id="@+id/saveButtonMeal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="530dp"
+        android:text="Save Meal" />
+
 </RelativeLayout>
 
  
