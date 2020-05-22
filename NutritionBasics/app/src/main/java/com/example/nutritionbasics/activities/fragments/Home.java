@@ -63,7 +63,6 @@ public class Home extends Fragment {
             fmt.setGroupingUsed(false);
             fmt.setMaximumIntegerDigits(9999);
             fmt.setMaximumFractionDigits(99);
-
             final TextView name = (TextView) view.findViewById(R.id.welcome);
             name.setText("Welcome ".concat(String.valueOf(user.getName())).concat(("!")));
 
@@ -71,13 +70,13 @@ public class Home extends Fragment {
             calories.setText(String.format("%.2f", user.getCalories() - caloriesCalc).concat(" cal"));
 
             final TextView protein = (TextView) view.findViewById(R.id.protein);
-            protein.setText(String.format("%.2f", user.getProteins() - proteinCalc).concat(" cal"));
+            protein.setText("Proteins: ".concat(String.format("%.2f", user.getProteins() - proteinCalc).concat(" cal")));
 
             final TextView carbohydrates = (TextView) view.findViewById(R.id.carbohydrates);
-            carbohydrates.setText(String.format("%.2f", user.getCarbohydrates() - carbohydratesCalc).concat(" cal"));
+            carbohydrates.setText("Carbohydrates: ".concat(String.format("%.2f", user.getCarbohydrates() - carbohydratesCalc).concat(" cal")));
 
             final TextView fat = (TextView) view.findViewById(R.id.fat);
-            fat.setText(String.format("%.2f", user.getFat() - fatCalc).concat(" cal"));
+            fat.setText("Fat: ".concat(String.format("%.2f", user.getFat() - fatCalc).concat(" cal")));
         }
         else getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profile()).commit();
 

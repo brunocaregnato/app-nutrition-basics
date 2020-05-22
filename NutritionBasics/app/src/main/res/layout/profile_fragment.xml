@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c1">
+    android:background="@color/colorPrimary"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,112 +13,115 @@
         android:text="Profile"
         android:textSize="30sp" />
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textName"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="120dp"
-        android:gravity="left|center_vertical"
-        android:text="Name:" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="150dp"
-        android:hint="Name" />
+        android:hint="Name"
+        android:selectAllOnFocus="false"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textHeight"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:gravity="left|center_vertical"
-        android:text="Height (cm):" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/height"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
         android:layout_marginTop="230dp"
         android:hint="Height (cm)"
-        android:inputType="numberSigned" />
+        android:selectAllOnFocus="false"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textWeight"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="200dp"
-        android:gravity="left|center_vertical"
-        android:text="Weight (kg):" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/weight"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="130dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="190dp"
         android:layout_marginTop="230dp"
         android:hint="Weight (kg)"
-        android:inputType="numberSigned" />
-
-    <TextView
-        android:id="@+id/textBirth"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="200dp"
         android:gravity="left|center_vertical"
-        android:text="Date of Birth:" />
+        android:selectAllOnFocus="false"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/birthday"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="230dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textBirth"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="320dp"
+        android:gravity="left|center_vertical"
         android:hint="Date of Birth"
-        android:inputType="date" />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="date"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:id="@+id/textSex"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="190dp"
         android:gravity="left|center_vertical"
-        android:layout_marginLeft="5dp"
         android:layout_marginTop="320dp"
-        android:text="Sex:" />
+        android:hint="Sex">
 
-    <Spinner
-        android:id="@+id/sex"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="350dp">
-    </Spinner>
+        <AutoCompleteTextView
+            android:id="@+id/sex"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <TextView
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:id="@+id/textActivityLevel"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="60dp"
         android:gravity="left|center_vertical"
-        android:layout_marginLeft="5dp"
         android:layout_marginTop="400dp"
-        android:text="Activity Level:" />
+        android:hint="Activity Level">
 
-    <Spinner
-        android:id="@+id/activityLevel"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="430dp">
-    </Spinner>
+        <AutoCompleteTextView
+            android:id="@+id/activityLevel"
+            android:focusable="false"
+            android:completionThreshold="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <Button
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="500dp"
-        android:text="Save Profile" />
-
+        android:layout_height="70dp"
+        android:layout_marginTop="480dp"
+        android:text="Save Profile">
+    </com.google.android.material.button.MaterialButton>
 </RelativeLayout>
 
- 

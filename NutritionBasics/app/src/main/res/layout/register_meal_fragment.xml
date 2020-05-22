@@ -3,110 +3,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/c1">
+    android:background="@color/colorPrimary"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top|center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="Register Meal"
         android:textSize="30sp" />
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textTitleName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:gravity="left|center_vertical"
-        android:text="Title meal:" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/fragment_meal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="150dp"
-        android:hint="Title meal" />
+        android:hint="Meal Title"
+        android:selectAllOnFocus="false"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_meal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:id="@+id/fragment_mealtitle_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"/>
-
+        android:layout_height="60dp"
+        android:layout_marginTop="220dp"
+        android:forceDarkAllowed="false"
+        android:hint="Select Food" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textWeightMeal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="260dp"
-            android:gravity="left|center_vertical"
-            android:text="Weight (g):" />
+            android:layout_width="190dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="300dp"
+            android:hint="Weight (g):"
+            android:selectAllOnFocus="false"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <TextView
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textDateMeal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="260dp"
-            android:gravity="left|center_vertical"
-            android:text="Date:" />
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="10dp"
+            android:hint="Meal Date"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="date"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fragment_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="280dp"
-            android:hint="Weight (g)" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fragment_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/fragment_weight"
-            android:layout_weight="1"
-            android:layout_marginTop="280dp"
-            android:hint="Date"
-            android:inputType="date"/>
-    </LinearLayout>
-
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textObsMeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:gravity="left|center_vertical"
-        android:text="Observation:" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/fragment_observation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="380dp"
+        android:hint="Observations"
         android:inputType="textMultiLine"
         android:lines="6"
         android:scrollbars="vertical"
-        android:hint="Observation   " />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <Button
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_observation"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="top"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/saveButtonMeal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginTop="530dp"
-        android:text="Save Meal" />
+        android:text="Register Meal">
+    </com.google.android.material.button.MaterialButton>
 
 </RelativeLayout>
 

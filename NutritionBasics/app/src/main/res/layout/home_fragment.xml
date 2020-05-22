@@ -2,109 +2,80 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c1">
+    android:background="@color/colorPrimary"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
 
-        <LinearLayout
-            android:background="@android:color/white"
-            android:layout_width="300dp"
-            android:layout_height="270dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="30dp"
-            android:orientation="horizontal"/>
+        <com.google.android.material.card.MaterialCardView
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
 
-        <TextView
-            android:id="@+id/welcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="50dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="20sp"
-            android:gravity="center_vertical"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="194dp"
+                            android:src="@drawable/nutrition_basics"
+                            android:scaleType="centerCrop"/>
 
-        <TextView
-            android:id="@+id/caloriesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="85dp"
-            android:text="Calories to Spend:"
-            android:gravity="left|center_vertical"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="24sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/calories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="100dp"
-            android:textSize="40sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:gravity="left|center_vertical"/>
+                                <TextView
+                                    android:id="@+id/welcome"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="24sp"
+                                    android:textAppearance="?attr/textAppearanceHeadline6"/>
 
-        <TextView
-            android:id="@+id/proteinText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
-            android:layout_marginLeft="50dp"
-            android:text="- Proteins:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="15sp" />
+                                 <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textSize="24sp"
+                                    android:text="You can consume today:"/>
 
-        <TextView
-            android:id="@+id/protein"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="180dp"
-            android:layout_marginLeft="50dp"
-            android:textSize="20sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:gravity="left|center_vertical"/>
+                                <TextView
+                                    android:id="@+id/calories"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="50sp"
+                                    android:gravity="center"
+                                    android:textAppearance="?attr/textAppearanceHeadline6"/>
 
-        <TextView
-            android:id="@+id/carbohydratesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
-            android:layout_marginLeft="50dp"
-            android:text="- Carbohydrates:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="15sp" />
+                                <TextView
+                                    android:id="@+id/protein"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="25sp"
+                                    android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/carbohydrates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="240dp"
-            android:layout_marginLeft="50dp"
-            android:textSize="20sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:gravity="left|center_vertical"/>
+                                <TextView
+                                    android:id="@+id/carbohydrates"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="25sp"
+                                    android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/fatText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="280dp"
-            android:layout_marginLeft="50dp"
-            android:text="- Fat:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="15sp" />
+                                <TextView
+                                    android:id="@+id/fat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="25sp"
+                                    android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/fat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
-            android:layout_marginLeft="50dp"
-            android:textSize="20sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:gravity="left|center_vertical"/>
-
+                        </LinearLayout>
+                </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
 
  

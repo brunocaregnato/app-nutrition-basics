@@ -18,13 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.nutritionbasics.R;
-import com.example.nutritionbasics.activities.MainActivity;
 import com.example.nutritionbasics.banco.BDfood;
 import com.example.nutritionbasics.banco.BDmeal;
-import com.example.nutritionbasics.banco.BDuser;
-import com.example.nutritionbasics.model.Food;
 import com.example.nutritionbasics.model.Meal;
-import com.example.nutritionbasics.model.User;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,13 +45,14 @@ public class RegisterMeal extends Fragment {
 
         bdF = new BDfood(getActivity().getApplicationContext());
 
-        final EditText mealTitle = (EditText) view.findViewById(R.id.fragment_meal);
-        final EditText weight = (EditText) view.findViewById(R.id.fragment_weight);
+        final TextInputEditText mealTitle = (TextInputEditText) view.findViewById(R.id.fragment_meal);
         final Spinner food = (Spinner) view.findViewById(R.id.fragment_mealtitle_spinner);
-        final EditText mealDate = (EditText) view.findViewById(R.id.fragment_date);
-        final EditText observation = (EditText) view.findViewById(R.id.fragment_observation);
+        final TextInputEditText weight = (TextInputEditText) view.findViewById(R.id.fragment_weight);
 
-        fragment_date = (EditText) view.findViewById(R.id.fragment_date);
+        final TextInputEditText mealDate = (TextInputEditText) view.findViewById(R.id.fragment_date);
+        final TextInputEditText observation = (TextInputEditText) view.findViewById(R.id.fragment_observation);
+
+        fragment_date = (TextInputEditText) view.findViewById(R.id.fragment_date);
         fragment_mealtitle_spinner = (Spinner) view.findViewById(R.id.fragment_mealtitle_spinner);
 
         List<String> numberList;
@@ -83,7 +81,6 @@ public class RegisterMeal extends Fragment {
 
             }
         });
-
 
         fragment_date.setInputType(InputType.TYPE_NULL);
         fragment_date.setOnClickListener(new View.OnClickListener() {
