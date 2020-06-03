@@ -19,7 +19,7 @@ import com.example.nutritionbasics.activities.fragments.History;
 import com.example.nutritionbasics.activities.fragments.Home;
 import com.example.nutritionbasics.activities.fragments.Profile;
 import com.example.nutritionbasics.activities.fragments.RegisterMeal;
-import com.example.nutritionbasics.banco.BDuser;
+import com.example.nutritionbasics.banco.BDfood;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BDuser bd = new BDuser(this);
+        BDfood bd = new BDfood(this);
 
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);

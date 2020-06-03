@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import com.example.nutritionbasics.R;
 import com.example.nutritionbasics.banco.BDfood;
-import com.example.nutritionbasics.banco.BDuser;
 import com.example.nutritionbasics.model.Food;
 import com.example.nutritionbasics.model.User;
 import com.google.android.material.button.MaterialButton;
@@ -32,7 +31,6 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
 
     private EditText birthday;
     private DatePickerDialog picker;
-    private BDuser bd;
     private BDfood bdF;
     private User user;
     private List<Food> _food;
@@ -44,7 +42,6 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
-        bd = new BDuser(getActivity().getApplicationContext());
         bdF = new BDfood(getActivity().getApplicationContext());
 
         AutoCompleteTextView spinner = view.findViewById(R.id.sex);
@@ -79,11 +76,7 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
                 bdF.addFood(_food.get(x));
             }*/
 
-
-
-
-
-        user = bd.getUser();
+        user = bdF.getUser();
 
         final TextInputEditText name = (TextInputEditText) view.findViewById(R.id.name);
         final TextInputEditText weight = (TextInputEditText) view.findViewById(R.id.weight);
@@ -140,8 +133,8 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
                 userProfile.setActivityLevel(activityLevelInt);
                 userProfile.setCalories(0);
 
-                if(user != null) bd.updateUser(userProfile);
-                else { bd.addUser(userProfile);
+                if(user != null) bdF.updateUser(userProfile);
+                else { bdF.addUser(userProfile);
                     for (int x = 0; x < _food.size(); x++) {
                         bdF.addFood(_food.get(x));
                     }

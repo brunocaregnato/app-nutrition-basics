@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.nutritionbasics.R;
 import com.example.nutritionbasics.banco.BDfood;
-import com.example.nutritionbasics.banco.BDmeal;
 import com.example.nutritionbasics.model.Meal;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -32,7 +31,6 @@ public class RegisterMeal extends Fragment {
     private EditText fragment_date;
     private DatePickerDialog picker;
     Spinner fragment_mealtitle_spinner;
-    private BDmeal bd;
     private BDfood bdF;
     String sNumber;
     int sPosition;
@@ -41,7 +39,6 @@ public class RegisterMeal extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_meal_fragment, container, false);
-        bd = new BDmeal(getActivity().getApplicationContext());
 
         bdF = new BDfood(getActivity().getApplicationContext());
 
@@ -113,7 +110,7 @@ public class RegisterMeal extends Fragment {
                 _meal.setD_date(mealDate.getText().toString());
                 _meal.setObservation(observation.getText().toString());
 
-                bd.addMeal(_meal);
+                bdF.addMeal(_meal);
 
                 //Redireciona para o fragment home
                 //Toast.makeText(getActivity().getApplicationContext(), _meal.getMealtitle() + " - " + _meal.getFood() + " - " + _meal.getTotalcalories() + " - " + _meal.getD_date() + " - " + _meal.getObservation() , Toast.LENGTH_LONG).show();
