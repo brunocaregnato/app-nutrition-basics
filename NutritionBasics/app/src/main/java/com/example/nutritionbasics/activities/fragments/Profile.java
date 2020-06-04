@@ -120,6 +120,10 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!validateProfile(name, weight, height, userBirthday)){
+                    Toast.makeText(getActivity().getApplicationContext(), "Fill all fields!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 User userProfile = new User();
                 userProfile.setName(name.getText().toString());
                 userProfile.setWeight(Integer.parseInt(weight.getText().toString()));
@@ -157,5 +161,14 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //do whatever
+    }
+
+    private boolean validateProfile(TextInputEditText name, TextInputEditText weight, TextInputEditText height, TextInputEditText userBirthday){
+        return !(name == null || weight == null || height == null ||
+                 userBirthday == null || sexSelected == null || activityLevel == null ||
+                 name.getText().toString().trim().equals("") ||
+                 weight.getText().toString().trim().equals("") ||
+                 height.getText().toString().trim().equals("") ||
+                 userBirthday.getText().toString().trim().equals(""));
     }
 }

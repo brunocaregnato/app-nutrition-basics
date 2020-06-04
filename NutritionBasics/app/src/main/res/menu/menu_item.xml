@@ -2,30 +2,32 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Aqui vao os itens do menu lateral -->
-
     <item
         android:id="@+id/home"
-        android:title="Home">
-    </item>
+        android:icon="@drawable/home"
+        android:title="Home"/>
     <item
         android:id="@+id/profile"
-        android:title="Profile">
-    </item>
+        android:icon="@drawable/person"
+        android:title="Profile" />
     <item
         android:id="@+id/registerMeal"
-        android:title="Register Meal">
-    </item>
+        android:icon="@drawable/add_meal"
+        android:title="Register Meal"/>
     <item
         android:id="@+id/details"
-        android:title="Details">
-    </item>
+        android:icon="@drawable/food"
+        android:title="Details"/>
     <item
         android:id="@+id/history"
-        android:title="History">
-    </item>
+        android:icon="@drawable/history"
+        android:title="History"/>
     <item
         android:id="@+id/evolution"
-        android:title="Evolution">
-    </item>
-
+        android:icon="@drawable/evolution"
+        android:title="Evolution"/>
+    <item
+        android:id="@+id/info"
+        android:icon="@drawable/info"
+        android:title="Info"/>
 </menu>

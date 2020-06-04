@@ -70,7 +70,7 @@ public class Home extends Fragment {
             final TextView fat = (TextView) view.findViewById(R.id.fat);
             fat.setText("Fat: ".concat(String.format("%.2f", user.getFat() - fatCalc).concat(" cal")));
         }
-        else getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profile()).commit();
+        else getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Info()).commit();
 
 
         return view;

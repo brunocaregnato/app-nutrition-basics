@@ -8,8 +8,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.RelativeSizeSpan;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.nutritionbasics.R;
@@ -17,9 +26,11 @@ import com.example.nutritionbasics.activities.fragments.Details;
 import com.example.nutritionbasics.activities.fragments.Evolution;
 import com.example.nutritionbasics.activities.fragments.History;
 import com.example.nutritionbasics.activities.fragments.Home;
+import com.example.nutritionbasics.activities.fragments.Info;
 import com.example.nutritionbasics.activities.fragments.Profile;
 import com.example.nutritionbasics.activities.fragments.RegisterMeal;
 import com.example.nutritionbasics.banco.BDfood;
+import com.example.nutritionbasics.model.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,37 +65,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Home()).commit();
-                break;
-            case R.id.profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Profile()).commit();
-                break;
-            case R.id.registerMeal:
-                //Toast.makeText(MainActivity.this, "Register Meal", Toast.LENGTH_LONG).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RegisterMeal()).commit();
-                break;
-            case R.id.details:
-                Toast.makeText(MainActivity.this, "Details", Toast.LENGTH_LONG).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Details()).commit();
-                break;
-            case R.id.history:
-                Toast.makeText(MainActivity.this, "History", Toast.LENGTH_LONG).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new History()).commit();
-                break;
-            case R.id.evolution:
-                Toast.makeText(MainActivity.this, "Evolution", Toast.LENGTH_LONG).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Evolution()).commit();
-                break;
+        BDfood bd = new BDfood(this);
+        if(bd.getUser() == null) {
+            Toast.makeText(MainActivity.this,"Register your Profile to use the app!", Toast.LENGTH_LONG).show();
         }
+        else {
+            switch (menuItem.getItemId()) {
+                case R.id.home:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new Home()).commit();
+                    break;
+                case R.id.profile:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new Profile()).commit();
+                    break;
+                case R.id.registerMeal:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new RegisterMeal()).commit();
+                    break;
+                case R.id.details:
+                    Toast.makeText(MainActivity.this, "Details", Toast.LENGTH_LONG).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new Details()).commit();
+                    break;
+                case R.id.history:
+                    Toast.makeText(MainActivity.this, "History", Toast.LENGTH_LONG).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new History()).commit();
+                    break;
+                case R.id.evolution:
+                    Toast.makeText(MainActivity.this, "Evolution", Toast.LENGTH_LONG).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new Evolution()).commit();
+                    break;
+
+                case R.id.info:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new Info()).commit();
+                    break;
+            }
+        }
+
         drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    //nao funciona
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater awesome = getMenuInflater();
+        awesome.inflate(R.menu.menu_item, menu);
+        for(int i = 0; i < menu.size(); i++) {
+            MenuItem item = menu.getItem(i);
+            SpannableString spanString = new SpannableString(menu.getItem(i).getTitle().toString());
+            int end = spanString.length();
+            spanString.setSpan(new AbsoluteSizeSpan(50, true), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            item.setTitle(spanString);
+        }
         return true;
     }
 }
