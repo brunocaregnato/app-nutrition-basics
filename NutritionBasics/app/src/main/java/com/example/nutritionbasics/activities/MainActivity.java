@@ -83,11 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new RegisterMeal()).commit();
                     break;
-                case R.id.details:
-                    Toast.makeText(MainActivity.this, "Details", Toast.LENGTH_LONG).show();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new Details()).commit();
-                    break;
                 case R.id.history:
                     Toast.makeText(MainActivity.this, "History", Toast.LENGTH_LONG).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -110,18 +105,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    //nao funciona
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater awesome = getMenuInflater();
-        awesome.inflate(R.menu.menu_item, menu);
-        for(int i = 0; i < menu.size(); i++) {
-            MenuItem item = menu.getItem(i);
-            SpannableString spanString = new SpannableString(menu.getItem(i).getTitle().toString());
-            int end = spanString.length();
-            spanString.setSpan(new AbsoluteSizeSpan(50, true), 0, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            item.setTitle(spanString);
-        }
-        return true;
-    }
 }

@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools">
     <!-- Aqui vao os itens do menu lateral -->
-    <item
-        android:id="@+id/home"
-        android:icon="@drawable/home"
-        android:title="Home"/>
-    <item
-        android:id="@+id/profile"
-        android:icon="@drawable/person"
-        android:title="Profile" />
-    <item
-        android:id="@+id/registerMeal"
-        android:icon="@drawable/add_meal"
-        android:title="Register Meal"/>
-    <item
-        android:id="@+id/details"
-        android:icon="@drawable/food"
-        android:title="Details"/>
-    <item
-        android:id="@+id/history"
-        android:icon="@drawable/history"
-        android:title="History"/>
-    <item
-        android:id="@+id/evolution"
-        android:icon="@drawable/evolution"
-        android:title="Evolution"/>
-    <item
-        android:id="@+id/info"
-        android:icon="@drawable/info"
-        android:title="Info"/>
+    <item android:title="Nutrition Basics">
+        <menu>
+            <item
+                android:id="@+id/home"
+                android:icon="@drawable/home"
+                android:title="Home"/>
+            <item
+                android:id="@+id/registerMeal"
+                android:icon="@drawable/add_meal"
+                android:title="Register Meal"/>
+        </menu>
+    </item>
+
+    <item android:title="Details">
+        <menu>
+            <item
+                android:id="@+id/profile"
+                android:icon="@drawable/person"
+                android:title="Profile" />
+            <item
+                android:id="@+id/history"
+                android:icon="@drawable/history"
+                android:title="History"/>
+            <item
+                android:id="@+id/evolution"
+                android:icon="@drawable/evolution"
+                android:title="Evolution"/>
+        </menu>
+    </item>
+
+    <item android:title="About">
+        <menu>
+            <item
+                android:id="@+id/info"
+                android:icon="@drawable/info"
+                android:title="Info"/>
+        </menu>
+    </item>
 </menu>

@@ -35,6 +35,7 @@
         app:headerLayout="@layout/header"
         android:background="@color/c3"
         android:layout_gravity="start"
+        app:itemTextAppearance="@style/ItemStyle"
         app:itemTextColor="#fff">
     </com.google.android.material.navigation.NavigationView>
 

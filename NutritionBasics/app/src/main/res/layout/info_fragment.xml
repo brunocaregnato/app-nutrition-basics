@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
+        android:layout_marginLeft="5dp"
         android:textSize="22sp"
         android:text="This app will show you the amount of daily calories you can consume based on the BMR calculation. \n\nIf you want to lose weight, consume below what appears, if you want to gain mass, consume up! \n\nWe are showing all macronutrients and micronutrients present in your diet so that this task becomes easier!"/>
 
