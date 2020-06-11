@@ -322,6 +322,37 @@ public class BDfood extends SQLiteOpenHelper {
         }
     }
 
+    public List<Meal> getAllMeals(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_MEAL, // a. tabela
+                COLUNAS_MEAL, // b. colunas
+                null, // c. colunas para comparar
+                null, // d. parâmetros
+                null, // e. group by
+                null, // f. having
+                null); // h. limit
+        if (cursor == null) {
+            return null;
+        } else {
+            List<Meal> meal = new ArrayList<>();
+            if (cursor.moveToFirst()) {
+                do {
+                    Meal _meal = new Meal();
+                    _meal.setId(Integer.parseInt(cursor.getString(0)));
+                    _meal.setD_date(cursor.getString(1));
+                    _meal.setFood(Integer.parseInt(cursor.getString(2)));
+                    _meal.setMealtitle(cursor.getString(3));
+                    _meal.setObservation(cursor.getString(4));
+                    _meal.setTotalcalories(Double.parseDouble(cursor.getString(5)));
+                    // Adding contact to list
+                    meal.add(_meal);
+                } while (cursor.moveToNext());
+            }
+
+            return meal;
+        }
+    }
+
     //FUNCTIONS USER --------------------------------------------------------------------------------------------------------------------------------------------------------------
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();

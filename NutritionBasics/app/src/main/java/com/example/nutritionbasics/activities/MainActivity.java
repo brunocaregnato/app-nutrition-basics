@@ -84,16 +84,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             new RegisterMeal()).commit();
                     break;
                 case R.id.history:
-                    Toast.makeText(MainActivity.this, "History", Toast.LENGTH_LONG).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new History()).commit();
                     break;
                 case R.id.evolution:
-                    Toast.makeText(MainActivity.this, "Evolution", Toast.LENGTH_LONG).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new Evolution()).commit();
                     break;
-
                 case R.id.info:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new Info()).commit();

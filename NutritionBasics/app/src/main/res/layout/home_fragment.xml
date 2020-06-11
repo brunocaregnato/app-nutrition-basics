@@ -5,7 +5,6 @@
     android:background="@color/colorPrimary"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
-
         <com.google.android.material.card.MaterialCardView
                 android:clickable="true"
                 android:focusable="true"
@@ -15,7 +14,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                         <ImageView
@@ -34,7 +33,7 @@
                                     android:id="@+id/welcome"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="24sp"
+                                    android:textSize="22sp"
                                     android:textAppearance="?attr/textAppearanceHeadline6"/>
 
                                  <TextView
@@ -49,31 +48,143 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="50sp"
+                                    android:layout_gravity="center_horizontal"
                                     android:gravity="center"
                                     android:textAppearance="?attr/textAppearanceHeadline6"/>
+
+                                <TextView
+                                    android:id="@+id/macros"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@drawable/set_right_2"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Macronutrients:"
+                                    android:textSize="23sp"
+                                    android:gravity="center"/>
 
                                 <TextView
                                     android:id="@+id/protein"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="25sp"
+                                    android:drawableLeft="@drawable/square"
+                                    android:textSize="23sp"
                                     android:gravity="center"/>
 
                                 <TextView
                                     android:id="@+id/carbohydrates"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="25sp"
+                                    android:drawableLeft="@drawable/square"
+                                    android:textSize="23sp"
                                     android:gravity="center"/>
 
                                 <TextView
                                     android:id="@+id/fat"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="25sp"
+                                    android:drawableLeft="@drawable/square"
+                                    android:textSize="23sp"
                                     android:gravity="center"/>
 
+                                <TextView
+                                    android:id="@+id/micros"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@drawable/set_right_2"
+                                    android:layout_marginTop="10dp"
+                                    android:text="Micronutrients:"
+                                    android:textSize="23sp"
+                                    android:gravity="center"/>
+
+                                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_width="170dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="left|center_horizontal"
+                                            android:gravity="left"
+                                            android:orientation="vertical">
+                                                <TextView
+                                                    android:id="@+id/vitaminA"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Vitamin A:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+
+                                                <TextView
+                                                    android:id="@+id/vitaminB"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Vitamin B:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+
+                                                <TextView
+                                                    android:id="@+id/vitaminC"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Vitamin C:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+
+                                                <TextView
+                                                    android:id="@+id/vitaminD"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Vitamin D:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="170dp"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical">
+                                                <TextView
+                                                    android:id="@+id/vitaminE"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Vitamin E:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+                                                <TextView
+                                                    android:id="@+id/calcium"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Calcium:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+                                                <TextView
+                                                    android:id="@+id/iron"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Iron:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+                                                <TextView
+                                                    android:id="@+id/zinc"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:drawableLeft="@drawable/square"
+                                                    android:text="Zinc:"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"/>
+
+                                        </LinearLayout>
+                                </LinearLayout>
                         </LinearLayout>
+
                 </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
