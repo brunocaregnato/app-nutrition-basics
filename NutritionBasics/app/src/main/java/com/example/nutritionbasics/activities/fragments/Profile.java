@@ -48,12 +48,7 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.sexs, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                           @Override
-                                           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                               sexSelected = (String) parent.getItemAtPosition(position);
-                                           }
-                                       });
+        spinner.setOnItemClickListener((parent, view1, position, id) -> sexSelected = (String) parent.getItemAtPosition(position));
 
         AutoCompleteTextView spinnerActivity = view.findViewById(R.id.activityLevel);
         adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.activitiesLevels, android.R.layout.simple_spinner_item);
@@ -78,12 +73,12 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
 
         user = bdF.getUser();
 
-        final TextInputEditText name = (TextInputEditText) view.findViewById(R.id.name);
-        final TextInputEditText weight = (TextInputEditText) view.findViewById(R.id.weight);
-        final TextInputEditText height = (TextInputEditText) view.findViewById(R.id.height);
-        final TextInputEditText userBirthday = (TextInputEditText) view.findViewById(R.id.birthday);
-        final AutoCompleteTextView sex = (AutoCompleteTextView) view.findViewById(R.id.sex);
-        final AutoCompleteTextView activitylevel = (AutoCompleteTextView) view.findViewById(R.id.activityLevel);
+        final TextInputEditText name = view.findViewById(R.id.name);
+        final TextInputEditText weight = view.findViewById(R.id.weight);
+        final TextInputEditText height = view.findViewById(R.id.height);
+        final TextInputEditText userBirthday = view.findViewById(R.id.birthday);
+        final AutoCompleteTextView sex = view.findViewById(R.id.sex);
+        final AutoCompleteTextView activitylevel = view.findViewById(R.id.activityLevel);
 
         if (user != null) {
             name.setText(user.getName());
@@ -96,58 +91,47 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
             activityLevel = activitylevel.getAdapter().getItem(user.getActivityLevel()).toString();
         }
 
-        birthday = (EditText) view.findViewById(R.id.birthday);
+        birthday = view.findViewById(R.id.birthday);
         birthday.setInputType(InputType.TYPE_NULL);
-        birthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
-                // date picker dialog
-                picker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                birthday.setText(String.format("%02d", dayOfMonth) + "/" + String.format("%02d", monthOfYear + 1) + "/" + year);
-                            }
-                        }, year, month, day);
-                picker.show();
-            }
+        birthday.setOnClickListener(v -> {
+            final Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
+            // date picker dialog
+            picker = new DatePickerDialog(getActivity(), (view12, year1, monthOfYear, dayOfMonth) -> birthday.setText(String.format("%02d", dayOfMonth) + "/" + String.format("%02d", monthOfYear + 1) + "/" + year1), year, month, day);
+            picker.show();
         });
 
-        final MaterialButton save = (MaterialButton) view.findViewById(R.id.saveButton);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!validateProfile(name, weight, height, userBirthday)){
-                    Toast.makeText(getActivity().getApplicationContext(), "Fill all fields!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                User userProfile = new User();
-                userProfile.setName(name.getText().toString());
-                userProfile.setWeight(Integer.parseInt(weight.getText().toString()));
-                userProfile.setHeight(Integer.parseInt(height.getText().toString()));
-                userProfile.setBirthday(userBirthday.getText().toString());
-                userProfile.setSex(sexSelected.toUpperCase().equals("MALE") ? 0 : 1);
-                int activityLevelInt;
-                if (activityLevel.toUpperCase().startsWith("S")) activityLevelInt = 0;
-                else if(activityLevel.toUpperCase().startsWith("A")) activityLevelInt = 1;
-                else activityLevelInt = 2;
-                userProfile.setActivityLevel(activityLevelInt);
-                userProfile.setCalories(0);
-
-                if(user != null) bdF.updateUser(userProfile);
-                else { bdF.addUser(userProfile);
-                    for (int x = 0; x < _food.size(); x++) {
-                        bdF.addFood(_food.get(x));
-                    }
-                }
-
-                //Redireciona para o fragment home
-                Toast.makeText(getActivity().getApplicationContext(), "Profile Updated Successfully ", Toast.LENGTH_LONG).show();
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
+        final MaterialButton save = view.findViewById(R.id.saveButton);
+        save.setOnClickListener(v -> {
+            if(!validateProfile(name, weight, height, userBirthday)){
+                Toast.makeText(getActivity().getApplicationContext(), "Fill all fields!", Toast.LENGTH_LONG).show();
+                return;
             }
+            User userProfile = new User();
+            userProfile.setName(name.getText().toString());
+            userProfile.setWeight(Integer.parseInt(weight.getText().toString()));
+            userProfile.setHeight(Integer.parseInt(height.getText().toString()));
+            userProfile.setBirthday(userBirthday.getText().toString());
+            userProfile.setSex(sexSelected.toUpperCase().equals("MALE") ? 0 : 1);
+            int activityLevelInt;
+            if (activityLevel.toUpperCase().startsWith("S")) activityLevelInt = 0;
+            else if(activityLevel.toUpperCase().startsWith("A")) activityLevelInt = 1;
+            else activityLevelInt = 2;
+            userProfile.setActivityLevel(activityLevelInt);
+            userProfile.setCalories(0);
+
+            if(user != null) bdF.updateUser(userProfile);
+            else { bdF.addUser(userProfile);
+                for (int x = 0; x < _food.size(); x++) {
+                    bdF.addFood(_food.get(x));
+                }
+            }
+
+            //Redireciona para o fragment home
+            Toast.makeText(getActivity().getApplicationContext(), "Profile Updated Successfully ", Toast.LENGTH_LONG).show();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
         });
 
         return view;

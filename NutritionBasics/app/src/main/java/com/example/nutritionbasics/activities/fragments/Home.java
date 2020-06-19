@@ -27,7 +27,6 @@ public class Home extends Fragment {
     private double caloriesCalc, proteinCalc, carbohydratesCalc, fatCalc;
     private float vitaminBCalc, vitaminDCalc, vitaminACalc, vitaminCCalc, vitaminECalc, calciumCalc, ironCalc, zincCalc;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,8 +81,6 @@ public class Home extends Fragment {
 
             final TextView zinc = view.findViewById(R.id.zinc);
             zinc.setText("Zinc: ".concat(String.format("%.2f", 11 - zincCalc).concat(" µg")));
-
-
 
         }
         else getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Info()).commit();

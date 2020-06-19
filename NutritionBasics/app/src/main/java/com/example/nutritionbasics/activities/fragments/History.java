@@ -1,6 +1,5 @@
 package com.example.nutritionbasics.activities.fragments;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nutritionbasics.R;
 import com.example.nutritionbasics.activities.Adapter;
-import com.example.nutritionbasics.activities.MainActivity;
 import com.example.nutritionbasics.activities.RecyclerItemClickListener;
 import com.example.nutritionbasics.banco.BDfood;
 import com.example.nutritionbasics.model.HistoryMeal;

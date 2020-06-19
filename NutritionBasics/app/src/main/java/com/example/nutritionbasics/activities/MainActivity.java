@@ -9,25 +9,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.RelativeSizeSpan;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.nutritionbasics.R;
-import com.example.nutritionbasics.activities.fragments.Details;
 import com.example.nutritionbasics.activities.fragments.Evolution;
 import com.example.nutritionbasics.activities.fragments.History;
 import com.example.nutritionbasics.activities.fragments.Home;
@@ -35,7 +22,6 @@ import com.example.nutritionbasics.activities.fragments.Info;
 import com.example.nutritionbasics.activities.fragments.Profile;
 import com.example.nutritionbasics.activities.fragments.RegisterMeal;
 import com.example.nutritionbasics.banco.BDfood;
-import com.example.nutritionbasics.model.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
-    private Home home;
-    private boolean backPressedToExitOnce;
 
     @SuppressLint("RestrictedApi")
     @Override

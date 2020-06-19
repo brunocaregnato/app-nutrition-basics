@@ -4,7 +4,7 @@ public class Food {
 
     private int id;
     private String foodName;
-    private double    calories;
+    private double calories;
     private double weight;
     private float vitaminB;
     private float vitaminD;
