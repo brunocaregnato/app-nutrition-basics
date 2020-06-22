@@ -1,8 +1,11 @@
 package com.example.nutritionbasics.activities.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +20,25 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.androidbuts.multispinnerfilter.KeyPairBoolData;
+import com.androidbuts.multispinnerfilter.MultiSpinnerSearch;
+import com.androidbuts.multispinnerfilter.SpinnerListener;
 import com.example.nutritionbasics.R;
 import com.example.nutritionbasics.banco.BDfood;
+import com.example.nutritionbasics.model.Food;
 import com.example.nutritionbasics.model.Meal;
+import com.example.nutritionbasics.parser.JSONParser;
+import com.example.nutritionbasics.util.InternetConnection;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,10 +46,11 @@ public class RegisterMeal extends Fragment {
 
     private EditText fragment_date;
     private DatePickerDialog picker;
-    Spinner fragment_mealtitle_spinner;
+    //Spinner fragment_mealtitle_spinner;
     private BDfood bdF;
     String sNumber;
     int sPosition;
+    List<KeyPairBoolData> listaSelectComida;
 
     @Nullable
     @Override
@@ -43,26 +60,66 @@ public class RegisterMeal extends Fragment {
         bdF = new BDfood(getActivity().getApplicationContext());
 
         final TextInputEditText mealTitle = (TextInputEditText) view.findViewById(R.id.fragment_meal);
-        final Spinner food = (Spinner) view.findViewById(R.id.fragment_mealtitle_spinner);
+        //final Spinner food = (Spinner) view.findViewById(R.id.fragment_mealtitle_spinner);
         final TextInputEditText weight = (TextInputEditText) view.findViewById(R.id.fragment_weight);
 
         final TextInputEditText mealDate = (TextInputEditText) view.findViewById(R.id.fragment_date);
         final TextInputEditText observation = (TextInputEditText) view.findViewById(R.id.fragment_observation);
 
         fragment_date = (TextInputEditText) view.findViewById(R.id.fragment_date);
-        fragment_mealtitle_spinner = (Spinner) view.findViewById(R.id.fragment_mealtitle_spinner);
+       // fragment_mealtitle_spinner = (Spinner) view.findViewById(R.id.fragment_mealtitle_spinner);
 
-        List<String> numberList;
-        numberList = new ArrayList<>();
+        List<Food> listaComida;
+        listaComida = new ArrayList<>();
+        listaSelectComida = new ArrayList<KeyPairBoolData>();
+        listaComida = bdF.getAllFoodFilter();
+/**
+ * Search MultiSelection Spinner (With Search/Filter Functionality)
+ *
+ *  Using MultiSpinnerSearch class
+ */
+       MultiSpinnerSearch searchSpinner = (MultiSpinnerSearch) view.findViewById(R.id.searchMultiSpinnerUnlimited);
+        final List<KeyPairBoolData> listArray = new ArrayList<KeyPairBoolData>();
 
-        numberList.add("Select Food");
-        numberList.add("Pears");
-        numberList.add("Cucumber");
-        numberList.add("Bacon (Raw)");
+        for(int i=0; i<listaComida.size(); i++) {
+            KeyPairBoolData h = new KeyPairBoolData();
+            h.setId(listaComida.get(i).getId());
+            h.setName(listaComida.get(i).getFoodName());
+            h.setSelected(false);
+            listArray.add(h);
+        }
 
-        fragment_mealtitle_spinner.setAdapter(new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,numberList));
+/***
+ * -1 is no by default selection
+ * 0 to length will select corresponding values
+ */
+        searchSpinner.setItems(listArray, -1, new SpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> items) {
 
-        fragment_mealtitle_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                for(int i=0; i<items.size(); i++) {
+                    if(items.get(i).isSelected()) {
+                        //Log.i("TAG", i + " : " + items.get(i).getId()  + " : " + items.get(i).getName() + " : " + items.get(i).isSelected());
+                       // Toast.makeText(getActivity().getApplicationContext(), items.get(i).getId()  + " : " + items.get(i).getName() + " : " + items.get(i).isSelected() , Toast.LENGTH_LONG).show();
+                        listaSelectComida.add(items.get(i));
+                    }
+                }
+            }
+        });
+
+        searchSpinner.setLimit(1, new MultiSpinnerSearch.LimitExceedListener() {
+            @Override
+            public void onLimitListener(KeyPairBoolData data) {
+                Toast.makeText(getContext(),
+                        "Limit exceed ", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+        //fragment_mealtitle_spinner.setAdapter(new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,numberList));
+
+       /* fragment_mealtitle_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
@@ -77,7 +134,7 @@ public class RegisterMeal extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         fragment_date.setInputType(InputType.TYPE_NULL);
         fragment_date.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +162,7 @@ public class RegisterMeal extends Fragment {
 
                 Meal _meal = new Meal();
                 _meal.setMealtitle(mealTitle.getText().toString());
-                _meal.setFood(sPosition);
+                _meal.setFood(toIntExact(listaSelectComida.get(0).getId()));
                 _meal.setTotalcalories(Double.parseDouble(weight.getText().toString()));
                 _meal.setD_date(mealDate.getText().toString());
                 _meal.setObservation(observation.getText().toString());
@@ -122,4 +179,12 @@ public class RegisterMeal extends Fragment {
 
         return view;
     }
+
+    public static int toIntExact(long value) {
+        if ((int)value != value) {
+            throw new ArithmeticException("integer overflow");
+        }
+        return (int)value;
+    }
+
 }

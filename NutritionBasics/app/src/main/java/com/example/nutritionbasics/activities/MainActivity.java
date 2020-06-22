@@ -21,6 +21,7 @@ import com.example.nutritionbasics.activities.fragments.Home;
 import com.example.nutritionbasics.activities.fragments.Info;
 import com.example.nutritionbasics.activities.fragments.Profile;
 import com.example.nutritionbasics.activities.fragments.RegisterMeal;
+import com.example.nutritionbasics.activities.fragments.Update;
 import com.example.nutritionbasics.banco.BDfood;
 import com.google.android.material.navigation.NavigationView;
 
@@ -84,6 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.info:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new Info()).commit();
+                    break;
+                case R.id.update:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new Update()).commit();
                     break;
             }
         }

@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 public class BDfood extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "foodDB";
 
     //TABLES
@@ -42,6 +42,7 @@ public class BDfood extends SQLiteOpenHelper {
     private static final String PROTEIN = "protein";
     private static final String CARBOHYDRATE = "carbohydrate";
     private static final String[] COLUNAS = { ID_FOOD, FOOD_NAME, CALORIES_FOOD, WEIGHT_FOOD, VITAMINB, VITAMIND, VITAMINA, VITAMINC, VITAMINE, CALCIUM, IRON, ZINC, FAT, PROTEIN, CARBOHYDRATE };
+    private static final String[] COLUNASFILTER = { ID_FOOD, FOOD_NAME };
     //CAMPOS MEAL
     private static final String ID_MEAL = "id_meal";
     private static final String D_DATE = "d_date";
@@ -218,6 +219,40 @@ public class BDfood extends SQLiteOpenHelper {
                 new String[] { String.valueOf(food.getId()) });
         db.close();
         return i; // número de linhas excluídas
+    }
+
+    public int deleteAllFood() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int i = db.delete(TABLE_FOOD, null, null);
+        db.close();
+        return i; // número de linhas excluídas
+    }
+
+    public List<Food> getAllFoodFilter(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_FOOD, // a. tabela
+                COLUNASFILTER, // b. colunas
+                null, // c. colunas para comparar
+                null, // d. parâmetros
+                null, // e. group by
+                null, // f. having
+                null); // h. limit
+        if (cursor == null) {
+            return null;
+        } else {
+            List<Food> food = new ArrayList<>();
+            if (cursor.moveToFirst()) {
+                do {
+                    Food _food = new Food();
+                    _food.setId(Integer.parseInt(cursor.getString(0)));
+                    _food.setFoodName(cursor.getString(1));
+                    // Adding contact to list
+                    food.add(_food);
+                } while (cursor.moveToNext());
+            }
+
+            return food;
+        }
     }
 
     //FUNCTIONS MEAL --------------------------------------------------------------------------------------------------------------------------------------------------------------

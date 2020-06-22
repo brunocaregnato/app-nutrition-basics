@@ -38,6 +38,10 @@
                 android:id="@+id/info"
                 android:icon="@drawable/info"
                 android:title="Info"/>
+            <item
+                android:id="@+id/update"
+                android:icon="@drawable/info"
+                android:title="Update"/>
         </menu>
     </item>
 </menu>
