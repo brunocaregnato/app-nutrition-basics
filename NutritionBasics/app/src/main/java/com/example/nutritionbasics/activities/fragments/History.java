@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nutritionbasics.R;
-import com.example.nutritionbasics.activities.Adapter;
-import com.example.nutritionbasics.activities.RecyclerItemClickListener;
-import com.example.nutritionbasics.banco.BDfood;
+import com.example.nutritionbasics.util.Adapter;
+import com.example.nutritionbasics.util.RecyclerItemClickListener;
+import com.example.nutritionbasics.banco.Database;
 import com.example.nutritionbasics.model.HistoryMeal;
 import com.example.nutritionbasics.model.Meal;
 
@@ -27,7 +27,7 @@ import java.util.List;
 
 public class History extends Fragment {
 
-    private BDfood bd;
+    private Database bd;
     private List<HistoryMeal> historyList;
     private RecyclerView recyclerView;
 
@@ -36,7 +36,7 @@ public class History extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.history_fragment, container, false);
-        bd = new BDfood(getActivity().getApplicationContext());
+        bd = new Database(getActivity().getApplicationContext());
 
         this.populateHistoryList();
         this.setRecyclerView(view);

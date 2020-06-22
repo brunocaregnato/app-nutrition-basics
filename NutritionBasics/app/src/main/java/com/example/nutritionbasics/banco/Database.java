@@ -6,30 +6,34 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.nutritionbasics.model.Food;
 import com.example.nutritionbasics.model.Meal;
 import com.example.nutritionbasics.model.User;
+import com.example.nutritionbasics.model.UserFood;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BDfood extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 7;
+public class Database extends SQLiteOpenHelper {
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "foodDB";
 
     //TABLES
     private static final String TABLE_FOOD = "food";
     private static final String TABLE_MEAL = "meal";
     private static final String TABLE_USUARIO = "usuario";
+    private static final String TABLE_FOODS_MEAL = "foods_meal";
 
     //CAMPOS FOOD
     private static final String ID_FOOD = "id_food";
     private static final String FOOD_NAME = "foodName";
     private static final String CALORIES_FOOD = "calories_food";
-    private static final String WEIGHT_FOOD = "weight_food";
     private static final String VITAMINB = "vitaminB";
     private static final String VITAMIND = "vitaminD";
     private static final String VITAMINA = "vitaminA";
@@ -41,16 +45,17 @@ public class BDfood extends SQLiteOpenHelper {
     private static final String FAT = "fat";
     private static final String PROTEIN = "protein";
     private static final String CARBOHYDRATE = "carbohydrate";
-    private static final String[] COLUNAS = { ID_FOOD, FOOD_NAME, CALORIES_FOOD, WEIGHT_FOOD, VITAMINB, VITAMIND, VITAMINA, VITAMINC, VITAMINE, CALCIUM, IRON, ZINC, FAT, PROTEIN, CARBOHYDRATE };
+    private static final String[] COLUNAS = { ID_FOOD, FOOD_NAME, CALORIES_FOOD, VITAMINB, VITAMIND, VITAMINA, VITAMINC, VITAMINE, CALCIUM, IRON, ZINC, FAT, PROTEIN, CARBOHYDRATE };
     private static final String[] COLUNASFILTER = { ID_FOOD, FOOD_NAME };
+
     //CAMPOS MEAL
     private static final String ID_MEAL = "id_meal";
     private static final String D_DATE = "d_date";
-    private static final String FOOD = "food";
     private static final String MEALTITLE = "mealtitle";
     private static final String OBSERVATION = "observation";
     private static final String TOTALCALORIES= "totalcalories";
-    private static final String[] COLUNAS_MEAL = { ID_MEAL, D_DATE, FOOD, MEALTITLE, OBSERVATION, TOTALCALORIES };
+    private static final String[] COLUNAS_MEAL = { ID_MEAL, D_DATE, MEALTITLE, OBSERVATION, TOTALCALORIES };
+
     //CAMPOS USER
     private static final String ID = "id";
     private static final String NAME = "name";
@@ -62,7 +67,13 @@ public class BDfood extends SQLiteOpenHelper {
     private static final String CALORIES = "calories";
     private static final String[] COLUNAS_USER = { ID, NAME, BIRTHDAY, HEIGHT, WEIGHT, ACTIVITYLEVEL, SEX, CALORIES };
 
-    public BDfood(Context context) {
+    //CAMPOS FOODS_MEAL
+    private static final String ID_FM_MEAL = "id_meal";
+    private static final String ID_FM_FOOD = "id_food";
+    private static final String FOOD_WEIGHT = "food_weight";
+    private static final String[] COLUNAS_FOODS_MEAL = { ID_FM_MEAL, ID_FM_FOOD, FOOD_WEIGHT };
+
+    public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -90,7 +101,6 @@ public class BDfood extends SQLiteOpenHelper {
         String CREATE_TABLE_MEAL = "CREATE TABLE meal ("+
                 "id_meal INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "d_date DATE,"+
-                "food INTEGER,"+
                 "mealtitle TEXT,"+
                 "observation TEXT,"+
                 "totalcalories DOUBLE)";
@@ -107,6 +117,12 @@ public class BDfood extends SQLiteOpenHelper {
                 "calories DOUBLE)";
         db.execSQL(CREATE_TABLE_USER);
 
+        String CREATE_TABLE_FOODS_MEAL = "CREATE TABLE foods_meal ("+
+                "id_meal INTEGER," +
+                "id_food INTEGER," +
+                "food_weight INTEGER," +
+                "PRIMARY KEY (id_meal, id_food))";
+        db.execSQL(CREATE_TABLE_FOODS_MEAL);
     }
 
     @Override
@@ -114,6 +130,7 @@ public class BDfood extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS food");
         db.execSQL("DROP TABLE IF EXISTS meal");
         db.execSQL("DROP TABLE IF EXISTS usuario");
+        db.execSQL("DROP TABLE IF EXISTS foods_meal");
         this.onCreate(db);
     }
 
@@ -125,7 +142,6 @@ public class BDfood extends SQLiteOpenHelper {
         values.put(ID_FOOD, food.getId());
         values.put(FOOD_NAME, food.getFoodName());
         values.put(CALORIES_FOOD, food.getCalories());
-        values.put(WEIGHT_FOOD, food.getWeight());
         values.put(VITAMINB, food.getVitaminB());
         values.put(VITAMIND, food.getVitaminD());
         values.put(VITAMINA, food.getVitaminA());
@@ -172,54 +188,20 @@ public class BDfood extends SQLiteOpenHelper {
         food.setId(Integer.parseInt(cursor.getString(0)));
         food.setFoodName(cursor.getString(1));
         food.setCalories(Double.parseDouble(cursor.getString(2)));
-        food.setWeight(Double.parseDouble(cursor.getString(3)));
-        food.setVitaminB(Float.parseFloat(cursor.getString(4)));
-        food.setVitaminD(Float.parseFloat(cursor.getString(5)));
-        food.setVitaminA(Float.parseFloat(cursor.getString(6)));
-        food.setVitaminC(Float.parseFloat(cursor.getString(7)));
-        food.setVitaminE(Float.parseFloat(cursor.getString(8)));
-        food.setCalcium(Float.parseFloat(cursor.getString(9)));
-        food.setIron(Float.parseFloat(cursor.getString(10)));
-        food.setZinc(Float.parseFloat(cursor.getString(11)));
-        food.setFat(Double.parseDouble(cursor.getString(12)));
-        food.setProtein(Double.parseDouble(cursor.getString(13)));
-        food.setCarbohydrate(Double.parseDouble(cursor.getString(14)));
+        food.setVitaminB(Float.parseFloat(cursor.getString(3)));
+        food.setVitaminD(Float.parseFloat(cursor.getString(4)));
+        food.setVitaminA(Float.parseFloat(cursor.getString(5)));
+        food.setVitaminC(Float.parseFloat(cursor.getString(6)));
+        food.setVitaminE(Float.parseFloat(cursor.getString(7)));
+        food.setCalcium(Float.parseFloat(cursor.getString(8)));
+        food.setIron(Float.parseFloat(cursor.getString(9)));
+        food.setZinc(Float.parseFloat(cursor.getString(10)));
+        food.setFat(Double.parseDouble(cursor.getString(11)));
+        food.setProtein(Double.parseDouble(cursor.getString(12)));
+        food.setCarbohydrate(Double.parseDouble(cursor.getString(13)));
         return food;
     }
 
-    public int updateFood(Food food) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(FOOD_NAME, food.getFoodName());
-        values.put(CALORIES_FOOD, new Double(food.getCalories()));
-        values.put(WEIGHT_FOOD, new Double(food.getWeight()));
-        values.put(VITAMINB, new Float(food.getVitaminB()));
-        values.put(VITAMIND, new Float(food.getVitaminD()));
-        values.put(VITAMINA, new Float(food.getVitaminA()));
-        values.put(VITAMINC, new Float(food.getVitaminC()));
-        values.put(VITAMINE, new Float(food.getVitaminE()));
-        values.put(CALCIUM, new Float(food.getCalcium()));
-        values.put(IRON, new Float(food.getIron()));
-        values.put(ZINC, new Float(food.getZinc()));
-        values.put(FAT, new Double(food.getFat()));
-        values.put(PROTEIN, new Double(food.getProtein()));
-        values.put(CARBOHYDRATE, new Double(food.getCarbohydrate()));
-        int i = db.update(TABLE_FOOD, //tabela
-                values, // valores
-                ID_FOOD+" = ?", // colunas para comparar
-                new String[] { String.valueOf(food.getId()) }); //parâmetros
-        db.close();
-        return i; // número de linhas modificadas
-    }
-
-    public int deleteFood(Food food) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        int i = db.delete(TABLE_FOOD, //tabela
-                ID_FOOD+" = ?", // colunas para comparar
-                new String[] { String.valueOf(food.getId()) });
-        db.close();
-        return i; // número de linhas excluídas
-    }
 
     public int deleteAllFood() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -246,7 +228,6 @@ public class BDfood extends SQLiteOpenHelper {
                     Food _food = new Food();
                     _food.setId(Integer.parseInt(cursor.getString(0)));
                     _food.setFoodName(cursor.getString(1));
-                    // Adding contact to list
                     food.add(_food);
                 } while (cursor.moveToNext());
             }
@@ -256,15 +237,26 @@ public class BDfood extends SQLiteOpenHelper {
     }
 
     //FUNCTIONS MEAL --------------------------------------------------------------------------------------------------------------------------------------------------------------
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void addMeal(Meal meal) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(D_DATE, meal.getD_date());
-        values.put(FOOD, meal.getFood());
         values.put(MEALTITLE, meal.getMealtitle());
         values.put(OBSERVATION, meal.getObservation());
         values.put(TOTALCALORIES, meal.getTotalcalories());
         db.insert(TABLE_MEAL, null, values);
+
+        final ContentValues contentValues = new ContentValues();
+
+        meal.getFoods().forEach(food -> {
+            contentValues.put(ID_FM_MEAL, getIdLastMeal());
+            contentValues.put(ID_FM_FOOD, food.getFood().getId());
+            contentValues.put(FOOD_WEIGHT, food.getWeight());
+
+            db.insert(TABLE_FOODS_MEAL, null, contentValues);
+        });
+
         db.close();
     }
 
@@ -287,42 +279,38 @@ public class BDfood extends SQLiteOpenHelper {
         }
     }
 
+    private int getIdLastMeal() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int id;
+        Cursor cursor = db.query(TABLE_MEAL, // a. tabela
+                COLUNAS_MEAL, // b. colunas
+                null, // c. colunas para comparar
+                null, // d. parâmetros
+                null, // e. group by
+                null, // f. having
+                ID_MEAL, // g. order by
+                null); // h. limit
+        if (cursor == null) {
+            return 0;
+        }
+        else {
+            cursor.moveToLast();
+            return cursorToMeal(cursor).getId();
+        }
+    }
+
     private Meal cursorToMeal(Cursor cursor) {
         Meal meal = new Meal();
         meal.setId(Integer.parseInt(cursor.getString(0)));
         meal.setD_date(cursor.getString(1));
-        meal.setFood(Integer.parseInt(cursor.getString(2)));
-        meal.setMealtitle(cursor.getString(3));
-        meal.setObservation(cursor.getString(4));
-        meal.setTotalcalories(Double.parseDouble(cursor.getString(5)));
+        meal.setMealtitle(cursor.getString(2));
+        meal.setObservation(cursor.getString(3));
+        meal.setTotalcalories(Double.parseDouble(cursor.getString(4)));
+
+
+
         return meal;
     }
-
-    public int updateMeal(Meal meal) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(D_DATE, meal.getD_date());
-        values.put(FOOD, new Integer(meal.getFood()));
-        values.put(MEALTITLE, meal.getMealtitle());
-        values.put(OBSERVATION, meal.getObservation());
-        values.put(TOTALCALORIES, new Double(meal.getTotalcalories()));
-        int i = db.update(TABLE_MEAL, //tabela
-                values, // valores
-                ID_MEAL+" = ?", // colunas para comparar
-                new String[] { String.valueOf(meal.getId()) }); //parâmetros
-        db.close();
-        return i; // número de linhas modificadas
-    }
-
-    public int deleteMeal(Meal meal) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        int i = db.delete(TABLE_MEAL, //tabela
-                ID_MEAL+" = ?", // colunas para comparar
-                new String[] { String.valueOf(meal.getId()) });
-        db.close();
-        return i; // número de linhas excluídas
-    }
-
 
     public List<Meal> getAllMealDay() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -331,24 +319,25 @@ public class BDfood extends SQLiteOpenHelper {
                 COLUNAS_MEAL, // b. colunas
                 " d_date = ?", // c. colunas para comparar
                 new String[] { sdf.format(new Date()) }, // d. parâmetros
-                //new String[] { String.valueOf(id) }, // d. parâmetros
                 null, // e. group by
                 null, // f. having
                 null); // h. limit
         if (cursor == null) {
             return null;
-        } else {
+        }
+        else {
             List<Meal> meal = new ArrayList<>();
             if (cursor.moveToFirst()) {
                 do {
                     Meal _meal = new Meal();
                     _meal.setId(Integer.parseInt(cursor.getString(0)));
                     _meal.setD_date(cursor.getString(1));
-                    _meal.setFood(Integer.parseInt(cursor.getString(2)));
-                    _meal.setMealtitle(cursor.getString(3));
-                    _meal.setObservation(cursor.getString(4));
-                    _meal.setTotalcalories(Double.parseDouble(cursor.getString(5)));
-                    // Adding contact to list
+                    _meal.setMealtitle(cursor.getString(2));
+                    _meal.setObservation(cursor.getString(3));
+                    _meal.setTotalcalories(Double.parseDouble(cursor.getString(4)));
+
+                    _meal.setFoods(getFoodsFromMeal(_meal.getId()));
+
                     meal.add(_meal);
                 } while (cursor.moveToNext());
             }
@@ -375,16 +364,44 @@ public class BDfood extends SQLiteOpenHelper {
                     Meal _meal = new Meal();
                     _meal.setId(Integer.parseInt(cursor.getString(0)));
                     _meal.setD_date(cursor.getString(1));
-                    _meal.setFood(Integer.parseInt(cursor.getString(2)));
-                    _meal.setMealtitle(cursor.getString(3));
-                    _meal.setObservation(cursor.getString(4));
-                    _meal.setTotalcalories(Double.parseDouble(cursor.getString(5)));
-                    // Adding contact to list
+                    _meal.setMealtitle(cursor.getString(2));
+                    _meal.setObservation(cursor.getString(3));
+                    _meal.setTotalcalories(Double.parseDouble(cursor.getString(4)));
+
+                    _meal.setFoods(getFoodsFromMeal(_meal.getId()));
                     meal.add(_meal);
                 } while (cursor.moveToNext());
             }
 
             return meal;
+        }
+    }
+
+    private List<UserFood> getFoodsFromMeal(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_FOODS_MEAL, // a. tabela
+                COLUNAS_FOODS_MEAL, // b. colunas
+                "id_meal = ?", // c. colunas para comparar
+                new String[] { String.valueOf(id) }, // d. parâmetros
+                null, // e. group by
+                null, // f. having
+                null); // h. limit
+        if (cursor == null) {
+            return null;
+        }
+        else {
+            List<UserFood> foods = new ArrayList<>();
+            if (cursor.moveToFirst()) {
+                do {
+                    UserFood food = new UserFood();
+                    food.setFood(getFood(Integer.parseInt(cursor.getString(1))));
+                    food.setWeight(Integer.parseInt(cursor.getString(2)));
+
+                    foods.add(food);
+                } while (cursor.moveToNext());
+            }
+
+            return foods;
         }
     }
 

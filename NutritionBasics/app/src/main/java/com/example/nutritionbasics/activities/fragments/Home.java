@@ -1,4 +1,5 @@
 package com.example.nutritionbasics.activities.fragments;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,13 +7,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.nutritionbasics.R;
-import com.example.nutritionbasics.banco.BDfood;
+import com.example.nutritionbasics.banco.Database;
 import com.example.nutritionbasics.model.Food;
 import com.example.nutritionbasics.model.Meal;
 import com.example.nutritionbasics.model.User;
+import com.example.nutritionbasics.model.UserFood;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -20,18 +23,19 @@ import java.util.List;
 
 public class Home extends Fragment {
 
-    private BDfood bdF;
+    private Database bdF;
     private User user;
-    private List<Meal> meal;
-    private Food food;
+    private List<Meal> meals;
+    private List<UserFood> foods;
     private double caloriesCalc, proteinCalc, carbohydratesCalc, fatCalc;
     private float vitaminBCalc, vitaminDCalc, vitaminACalc, vitaminCCalc, vitaminECalc, calciumCalc, ironCalc, zincCalc;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
-        bdF = new BDfood(getActivity().getApplicationContext());
+        bdF = new Database(getActivity().getApplicationContext());
 
         this.calculateMacrosAndMicros();
         user = bdF.getUser();
@@ -88,25 +92,27 @@ public class Home extends Fragment {
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void calculateMacrosAndMicros(){
 
-        meal = new ArrayList<>();
-        meal = bdF.getAllMealDay();
+        meals = new ArrayList<>();
+        meals = bdF.getAllMealDay();
 
-        for(int x = 0; x < meal.size(); x++){
-            food = bdF.getFood(meal.get(x).getFood());
-            caloriesCalc += ((meal.get(x).getTotalcalories() * food.getCalories())/food.getWeight());
-            proteinCalc += ((meal.get(x).getTotalcalories() * food.getProtein())/food.getWeight());
-            carbohydratesCalc += ((meal.get(x).getTotalcalories() * food.getCarbohydrate())/food.getWeight());
-            fatCalc += ((meal.get(x).getTotalcalories() * food.getFat())/food.getWeight());
-            vitaminBCalc += food.getVitaminB();
-            vitaminDCalc += food.getVitaminD();
-            vitaminACalc += food.getVitaminA();
-            vitaminCCalc += food.getVitaminC();
-            vitaminECalc += food.getVitaminE();
-            calciumCalc += food.getCalcium();
-            ironCalc += food.getIron();
-            zincCalc += food.getZinc();
-        }
+        meals.forEach(meal -> {
+            meal.getFoods().forEach(food -> {
+                caloriesCalc += (food.getFood().getCalories() * food.getWeight() / 100);
+                proteinCalc += ((food.getFood().getProtein() * food.getWeight()) / 100);
+                carbohydratesCalc += ((food.getFood().getCarbohydrate() * food.getWeight()) / 100);
+                fatCalc += ((food.getFood().getFat() * food.getWeight()) / 100);
+                vitaminBCalc += food.getFood().getVitaminB();
+                vitaminDCalc += food.getFood().getVitaminD();
+                vitaminACalc += food.getFood().getVitaminA();
+                vitaminCCalc += food.getFood().getVitaminC();
+                vitaminECalc += food.getFood().getVitaminE();
+                calciumCalc += food.getFood().getCalcium();
+                ironCalc += food.getFood().getIron();
+                zincCalc += food.getFood().getZinc();
+            });
+        });
     }
 }

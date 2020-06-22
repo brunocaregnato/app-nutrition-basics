@@ -30,40 +30,16 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
-        android:id="@+id/searchMultiSpinnerUnlimited"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="220dp"
-        app:hintText="Select Food" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textWeightMeal"
-            android:layout_width="190dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="300dp"
-            android:hint="Weight (g):"
-            android:selectAllOnFocus="false"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberSigned"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textDateMeal"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="300dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginTop="230dp"
             android:hint="Meal Date"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -80,10 +56,10 @@
         android:id="@+id/textObsMeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="310dp"
         android:hint="Observations"
         android:inputType="textMultiLine"
-        android:lines="6"
+        android:lines="7"
         android:scrollbars="vertical"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -96,11 +72,11 @@
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:id="@+id/saveButtonMeal"
+        android:id="@+id/addFoodsButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="530dp"
-        android:text="Register Meal">
+        android:text="Add Foods">
     </com.google.android.material.button.MaterialButton>
 
 </RelativeLayout>

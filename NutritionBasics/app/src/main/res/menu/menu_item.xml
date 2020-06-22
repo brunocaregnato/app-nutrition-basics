@@ -40,8 +40,8 @@
                 android:title="Info"/>
             <item
                 android:id="@+id/update"
-                android:icon="@drawable/info"
-                android:title="Update"/>
+                android:icon="@drawable/get_app"
+                android:title="Update" />
         </menu>
     </item>
 </menu>

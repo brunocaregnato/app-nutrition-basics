@@ -1,10 +1,12 @@
 package com.example.nutritionbasics.model;
 
+import java.util.List;
+
 public class Meal {
 
     private int id;
     private String d_date;
-    private int    food;
+    private List<UserFood> foods;
     private String mealtitle;
     private String observation;
 
@@ -12,10 +14,10 @@ public class Meal {
 
     public Meal() { }
 
-    public Meal(int id, String d_date, int food, String mealtitle, String observation, double totalcalories) {
+    public Meal(int id, String d_date, List<UserFood> food, String mealtitle, String observation, double totalcalories) {
         this.id = id;
         this.d_date = d_date;
-        this.food = food;
+        this.foods = food;
         this.mealtitle = mealtitle;
         this.observation = observation;
         this.totalcalories = totalcalories;
@@ -29,8 +31,8 @@ public class Meal {
         return d_date;
     }
 
-    public int getFood() {
-        return food;
+    public List<UserFood> getFoods() {
+        return foods;
     }
 
     public String getMealtitle() {
@@ -53,9 +55,7 @@ public class Meal {
         this.d_date = d_date;
     }
 
-    public void setFood(int food) {
-        this.food = food;
-    }
+    public void setFoods(List<UserFood> food) { this.foods = food; }
 
     public void setMealtitle(String mealtitle) {
         this.mealtitle = mealtitle;
@@ -65,8 +65,6 @@ public class Meal {
         this.observation = observation;
     }
 
-    public void setTotalcalories(double totalcalories) {
-        this.totalcalories = totalcalories;
-    }
+    public void setTotalcalories(double totalcalories) { this.totalcalories = totalcalories; }
 
 }

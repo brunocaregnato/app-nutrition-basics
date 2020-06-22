@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/foodName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:gravity="left|center_vertical"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/foodWeight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="number"
+        android:hint="Weight (g)"
+        android:layout_weight="2"
+        android:ems="10" />
+</LinearLayout>

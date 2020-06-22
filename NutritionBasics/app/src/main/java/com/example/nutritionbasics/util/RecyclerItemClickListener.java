@@ -1,4 +1,4 @@
-package com.example.nutritionbasics.activities;
+package com.example.nutritionbasics.util;
 
 import android.content.Context;
 import android.view.GestureDetector;

@@ -22,7 +22,7 @@ import com.example.nutritionbasics.activities.fragments.Info;
 import com.example.nutritionbasics.activities.fragments.Profile;
 import com.example.nutritionbasics.activities.fragments.RegisterMeal;
 import com.example.nutritionbasics.activities.fragments.Update;
-import com.example.nutritionbasics.banco.BDfood;
+import com.example.nutritionbasics.banco.Database;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BDfood bd = new BDfood(this);
+        Database bd = new Database(this);
 
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        BDfood bd = new BDfood(this);
+        Database bd = new Database(this);
         if(bd.getUser() == null) {
             Toast.makeText(MainActivity.this,"Register your Profile to use the app!", Toast.LENGTH_LONG).show();
         }

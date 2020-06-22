@@ -5,7 +5,6 @@ public class Food {
     private int id;
     private String foodName;
     private double calories;
-    private double weight;
     private float vitaminB;
     private float vitaminD;
     private float vitaminA;
@@ -26,7 +25,6 @@ public class Food {
         this.id = id;
         this.foodName = foodName;
         this.calories = calories;
-        this.weight = weight;
         this.vitaminB = vitaminB;
         this.vitaminD = vitaminD;
         this.vitaminA = vitaminA;
@@ -50,10 +48,6 @@ public class Food {
 
     public void setCalories(double calories) {
         this.calories = calories;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 
     public void setVitaminB(float vitaminB) {
@@ -110,10 +104,6 @@ public class Food {
 
     public double getCalories() {
         return calories;
-    }
-
-    public double getWeight() {
-        return weight;
     }
 
     public float getVitaminB() {

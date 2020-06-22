@@ -23,17 +23,16 @@ public class JSONParser {
 
     public static JSONObject getDataFromWeb() {
         try {
-            Log.i("vENI3", "PORRAAAAAAAA" );
             OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(MAIN_URL)
-                    .build();
-            Log.i("vENI9", "PORRAAAAAAAA" );
+            Request request = new Request.Builder().url(MAIN_URL).build();
+
             response = client.newCall(request).execute();
-            Log.i("vENI8", "PORRAAAAAAAA" );
+
             return new JSONObject(response.body().string());
-        } catch (@NonNull IOException | JSONException e) {
-            Log.e(TAG, "VISHHH" + e.getLocalizedMessage());
+
+        }
+        catch (@NonNull IOException | JSONException e) {
+            Log.e(TAG,e.getLocalizedMessage());
         }
         return null;
     }

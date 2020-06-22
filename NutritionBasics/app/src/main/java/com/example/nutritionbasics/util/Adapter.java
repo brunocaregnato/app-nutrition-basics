@@ -1,4 +1,4 @@
-package com.example.nutritionbasics.activities;
+package com.example.nutritionbasics.util;
 
 import android.view.LayoutInflater;
 import android.view.View;
