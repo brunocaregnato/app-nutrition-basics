@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -49,6 +50,16 @@ public class RegisterMeal extends Fragment {
 
         final Button addFoodsButton = view.findViewById(R.id.addFoodsButton);
         addFoodsButton.setOnClickListener(v -> {
+
+            if (mealTitle.getText() == null || mealTitle.getText().toString().trim().equals("")){
+                Toast.makeText(getActivity().getApplicationContext(), "Meal title must be filled!", Toast.LENGTH_LONG).show();
+                return;
+            }
+            else if(mealDate.getText() == null || mealDate.getText().toString().trim().equals("")){
+                Toast.makeText(getActivity().getApplicationContext(), "Meal date must be filled!", Toast.LENGTH_LONG).show();
+                return;
+            }
+
             Meal _meal = new Meal();
             _meal.setMealtitle(mealTitle.getText().toString());
             _meal.setD_date(mealDate.getText().toString());

@@ -19,7 +19,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginLeft="5dp"
         android:textSize="22sp"
-        android:text="The food nutritional informations were taken from the FoodData Central - U.S. Department of Agriculture sheet.. \n\n\n Click bellow for using the food nutritional informations in your app."/>
+        android:text="The food nutritional informations were taken from the FoodData Central - U.S. Department of Agriculture sheet. \n\n\nClick bellow for update the food nutritional informations in your app."/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="480dp"
-        android:text="Download">
+        android:text="Update Nutritional Informations">
     </com.google.android.material.button.MaterialButton>
 
 

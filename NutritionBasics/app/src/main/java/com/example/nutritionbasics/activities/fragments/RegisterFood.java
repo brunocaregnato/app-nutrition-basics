@@ -67,6 +67,26 @@ public class RegisterFood extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void registerMeal(){
         registerMealButton.setOnClickListener(result -> {
+
+            if(foodAddList.size() == 0){
+                Toast.makeText(getActivity().getApplicationContext(), "Add at least one food!", Toast.LENGTH_LONG).show();
+                return;
+            }
+            else {
+                boolean error = false;
+                for(KeyPairBoolData food : foodAddList){
+                    if(food.getObject() == null || String.valueOf(food.getObject()).trim().equals("")
+                            || Integer.parseInt(String.valueOf(food.getObject())) == 0){
+                        error = true;
+                        break;
+                    }
+                }
+                if (error){
+                    Toast.makeText(getActivity().getApplicationContext(), "All weights must be filled!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+
             List<UserFood> listFood = new ArrayList<>();
             AtomicReference<Double> calories = new AtomicReference<>((double) 0);
             foodAddList.forEach(item -> {
@@ -88,8 +108,7 @@ public class RegisterFood extends Fragment {
 
     private void createSpinner(){
 
-        List<Food> foodList;
-        foodList = bdF.getAllFoodFilter();
+        List<Food> foodList = bdF.getAllFoodFilter();
         foodAddList = new ArrayList<>();
 
         final List<KeyPairBoolData> listArray = new ArrayList<>();
