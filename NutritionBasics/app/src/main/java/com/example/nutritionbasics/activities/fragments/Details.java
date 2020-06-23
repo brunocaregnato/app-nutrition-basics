@@ -78,7 +78,7 @@ public class Details extends Fragment {
 
 
         final TextView detailTitle = view.findViewById(R.id.detailTitle);
-        detailTitle.setText(meal.getMealtitle() + " Details - Total Calories: ".concat(String.format("%.2f", caloriesCalc)).concat(" cal"));
+        detailTitle.setText(meal.getMealtitle() + " Details - Total Calories: ".concat(String.format("%.2f", caloriesCalc)));
 
         final TextView vitaminA = view.findViewById(R.id.mealVitaminA);
         vitaminA.setText("Vitamin A: ".concat(String.format("%.2f", vitaminACalc).concat(" µg")));
