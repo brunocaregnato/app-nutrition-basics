@@ -7,6 +7,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -15,8 +16,10 @@ import com.example.nutritionbasics.model.Meal;
 import com.example.nutritionbasics.model.User;
 import com.example.nutritionbasics.model.UserFood;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -346,6 +349,47 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    public List<Meal> getAllMealsRange() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_MEAL, // a. tabela
+                COLUNAS_MEAL, // b. colunas
+                " d_date between ? and ?", // c. colunas para comparar
+                new String[] { getCalculatedDate("dd/MM/yyyy", -7), getCalculatedDate("dd/MM/yyyy", 0) }, // d. parâmetros
+                null, // e. group by
+                null, // f. having
+                null); // h. limit
+        if (cursor == null) {
+            return null;
+        }
+        else {
+            List<Meal> meal = new ArrayList<>();
+            if (cursor.moveToFirst()) {
+                do {
+                    Meal _meal = new Meal();
+                    _meal.setId(Integer.parseInt(cursor.getString(0)));
+                    _meal.setD_date(cursor.getString(1));
+                    _meal.setMealtitle(cursor.getString(2));
+                    _meal.setObservation(cursor.getString(3));
+                    _meal.setTotalcalories(Double.parseDouble(cursor.getString(4)));
+
+                    _meal.setFoods(getFoodsFromMeal(_meal.getId()));
+
+                    meal.add(_meal);
+                } while (cursor.moveToNext());
+            }
+
+            return meal;
+        }
+    }
+
+    private static String getCalculatedDate(String dateFormat, int days) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat s = new SimpleDateFormat(dateFormat);
+        cal.add(Calendar.DAY_OF_YEAR, days);
+        return s.format(new Date(cal.getTimeInMillis()));
+    }
+
     public List<Meal> getAllMeals(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_MEAL, // a. tabela
@@ -377,7 +421,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    private List<UserFood> getFoodsFromMeal(int id){
+    public List<UserFood> getFoodsFromMeal(int id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_FOODS_MEAL, // a. tabela
                 COLUNAS_FOODS_MEAL, // b. colunas

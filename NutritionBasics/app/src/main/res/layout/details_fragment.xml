@@ -12,6 +12,180 @@
         android:layout_marginTop="50dp"
         android:textSize="30sp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/mealCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="left"
+            android:layout_marginTop="90dp"
+            android:textAppearance="?attr/textAppearanceHeadline6"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/set_right_2"
+            android:layout_marginTop="20dp"
+            android:text="Macronutrients:"
+            android:textSize="23sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/mealProtein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/square"
+            android:textSize="23sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/mealCarbohydrates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/square"
+            android:textSize="23sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/mealFat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/square"
+            android:textSize="23sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/set_right_2"
+            android:layout_marginTop="10dp"
+            android:text="Micronutrients:"
+            android:textSize="23sp"
+            android:gravity="center"/>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_horizontal"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mealVitaminA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Vitamin A:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/mealVitaminB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Vitamin B:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/mealVitaminC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Vitamin C:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/mealVitaminD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Vitamin D:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/mealVitaminE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Vitamin E:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/mealCalcium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Calcium:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/mealIron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Iron:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/mealZinc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/square"
+                    android:text="Zinc:"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/set_right_2"
+            android:layout_marginTop="10dp"
+            android:text="Foods:"
+            android:textSize="23sp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/mealFoods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text=""
+            android:gravity="left"/>
+
+        <TextView
+            android:id="@+id/observation"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text=""
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:gravity="left"/>
+
+    </LinearLayout>
 </RelativeLayout>
 
  

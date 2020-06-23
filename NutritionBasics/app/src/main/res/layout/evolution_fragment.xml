@@ -10,8 +10,14 @@
         android:layout_height="match_parent"
         android:gravity="top|center_horizontal"
         android:layout_marginTop="50dp"
-        android:text="Evolution"
+        android:text="Evolution (Last 7 days)"
         android:textSize="30sp" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
 

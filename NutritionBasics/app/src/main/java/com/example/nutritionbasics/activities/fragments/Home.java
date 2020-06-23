@@ -26,7 +26,6 @@ public class Home extends Fragment {
     private Database bdF;
     private User user;
     private List<Meal> meals;
-    private List<UserFood> foods;
     private double caloriesCalc, proteinCalc, carbohydratesCalc, fatCalc;
     private float vitaminBCalc, vitaminDCalc, vitaminACalc, vitaminCCalc, vitaminECalc, calciumCalc, ironCalc, zincCalc;
 
