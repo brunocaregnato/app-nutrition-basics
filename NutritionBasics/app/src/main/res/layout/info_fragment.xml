@@ -4,20 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top|center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="Informations"
-        android:textSize="30sp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:textSize="22sp"
         android:text="This app will show you the amount of daily calories you can consume based on the BMR calculation. \n\nIf you want to lose weight, consume below what appears, if you want to gain mass, consume up! \n\nWe are showing all macronutrients and micronutrients present in your diet so that this task becomes easier!"/>
 
@@ -26,7 +18,9 @@
         android:id="@+id/profileButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="400dp"
         android:text="Take me to Profile">
     </com.google.android.material.button.MaterialButton>
 

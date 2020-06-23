@@ -58,8 +58,8 @@ public class Evolution extends Fragment {
             });
         });
 
-        BarDataSet bardataset = new BarDataSet(calories, "Calories consumed");
-        barChart.animateY(1000);
+        BarDataSet bardataset = new BarDataSet(calories, " - Calories consumed");
+        barChart.animateY(2000);
         BarData data = new BarData(days, bardataset);
         bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart.setData(data);
@@ -68,23 +68,12 @@ public class Evolution extends Fragment {
     }
 
     private void populateDates(){
-        days.add(getCalculatedDate("dd/MM/yyyy", -7));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", -7), 0);
-        days.add(getCalculatedDate("dd/MM/yyyy", -6));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", -6), 1);
-        days.add(getCalculatedDate("dd/MM/yyyy", -5));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", -5), 2);
-        days.add(getCalculatedDate("dd/MM/yyyy", -4));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", -4), 3);
-        days.add(getCalculatedDate("dd/MM/yyyy", -3));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", -3), 4);
-        days.add(getCalculatedDate("dd/MM/yyyy", -2));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", -2), 5);
-        days.add(getCalculatedDate("dd/MM/yyyy", -1));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", -1), 6);
-        days.add(getCalculatedDate("dd/MM/yyyy", 0));
-        daysPosition.put(getCalculatedDate("dd/MM/yyyy", 0), 7);
-
+        int j = 0;
+        for(int i = -6; i <= 0; i++){
+            days.add(getCalculatedDate("dd/MM/yyyy", i));
+            daysPosition.put(getCalculatedDate("dd/MM/yyyy", i), j);
+            j++;
+        }
     }
 
     private static String getCalculatedDate(String dateFormat, int days) {

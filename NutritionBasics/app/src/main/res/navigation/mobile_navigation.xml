@@ -36,14 +36,14 @@
     <fragment
         android:id="@+id/evolution"
         android:name="com.example.nutritionbasics.activities.fragments.Evolution"
-        android:label="Register Meal"
+        android:label="Evolution (Last 7 days)"
         tools:layout="@layout/evolution_fragment">
     </fragment>
 
     <fragment
         android:id="@+id/info"
         android:name="com.example.nutritionbasics.activities.fragments.Info"
-        android:label="Register Meal"
+        android:label="Informations"
         tools:layout="@layout/info_fragment">
     </fragment>
 

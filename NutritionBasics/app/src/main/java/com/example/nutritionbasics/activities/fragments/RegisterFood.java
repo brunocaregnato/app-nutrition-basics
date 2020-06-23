@@ -24,6 +24,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -134,7 +135,10 @@ public class RegisterFood extends Fragment {
             foodAddListView.setAdapter(listViewAdapter);
         });
 
-        searchSpinner.setLimit(10, data -> Toast.makeText(getContext(),
-                "Limit exceed ", Toast.LENGTH_LONG).show());
+        searchSpinner.setColorSeparation(true);
+        searchSpinner.setSearchHint("Type Food Name...");
+
+        searchSpinner.setLimit(15, data -> Toast.makeText(getContext(),
+                "Limit exceed!", Toast.LENGTH_LONG).show());
     }
 }

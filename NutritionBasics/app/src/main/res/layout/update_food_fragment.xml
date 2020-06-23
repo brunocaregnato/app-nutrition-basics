@@ -6,27 +6,22 @@
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top|center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="Update"
-        android:textSize="30sp" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:textSize="22sp"
         android:text="The food nutritional informations were taken from the FoodData Central - U.S. Department of Agriculture sheet. \n\n\nClick bellow for update the food nutritional informations in your app."/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/downloadButton"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="400dp"
         android:text="Update Nutritional Informations">
     </com.google.android.material.button.MaterialButton>
 

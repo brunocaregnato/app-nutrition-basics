@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
     private static final String DATABASE_NAME = "foodDB";
 
     //TABLES
@@ -310,8 +310,6 @@ public class Database extends SQLiteOpenHelper {
         meal.setObservation(cursor.getString(3));
         meal.setTotalcalories(Double.parseDouble(cursor.getString(4)));
 
-
-
         return meal;
     }
 
@@ -363,6 +361,7 @@ public class Database extends SQLiteOpenHelper {
             return null;
         }
         else {
+            cursor.getCount();
             List<Meal> meal = new ArrayList<>();
             if (cursor.moveToFirst()) {
                 do {

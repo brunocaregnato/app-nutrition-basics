@@ -5,19 +5,13 @@
     android:background="@color/colorPrimary"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top|center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="Profile"
-        android:textSize="30sp" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textName"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:hint="Name"
         android:selectAllOnFocus="false"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -32,7 +26,9 @@
         android:id="@+id/textHeight"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:hint="Height (cm)"
         android:selectAllOnFocus="false"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -49,7 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="190dp"
-        android:layout_marginTop="230dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="130dp"
         android:hint="Weight (kg)"
         android:gravity="left|center_vertical"
         android:selectAllOnFocus="false"
@@ -66,7 +63,9 @@
         android:id="@+id/textBirth"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:gravity="left|center_vertical"
         android:hint="Date of Birth"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -84,9 +83,10 @@
         android:id="@+id/textSex"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginRight="5dp"
         android:layout_marginLeft="190dp"
         android:gravity="left|center_vertical"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="220dp"
         android:hint="Sex">
 
         <AutoCompleteTextView
@@ -101,9 +101,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:id="@+id/textActivityLevel"
         android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_height="60dp"
         android:gravity="left|center_vertical"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="300dp"
         android:hint="Activity Level">
 
         <AutoCompleteTextView
@@ -119,8 +121,10 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_height="70dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="400dp"
         android:text="Save Profile">
     </com.google.android.material.button.MaterialButton>
 </RelativeLayout>

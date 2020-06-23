@@ -19,7 +19,7 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="194dp"
+                            android:layout_height="170dp"
                             android:src="@drawable/nutrition_basics"
                             android:scaleType="centerCrop"/>
 
@@ -33,21 +33,21 @@
                                     android:id="@+id/welcome"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="22sp"
+                                    android:textSize="18sp"
                                     android:textAppearance="?attr/textAppearanceHeadline6"/>
 
                                  <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
-                                    android:textSize="24sp"
+                                    android:textSize="20sp"
                                     android:text="You can consume today:"/>
 
                                 <TextView
                                     android:id="@+id/calories"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="50sp"
+                                    android:textSize="40sp"
                                     android:layout_gravity="center_horizontal"
                                     android:gravity="center"
                                     android:textAppearance="?attr/textAppearanceHeadline6"/>
@@ -57,7 +57,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:drawableLeft="@drawable/set_right_2"
-                                    android:layout_marginTop="10dp"
+                                    android:layout_marginTop="5dp"
                                     android:text="Macronutrients:"
                                     android:textSize="23sp"
                                     android:gravity="center"/>

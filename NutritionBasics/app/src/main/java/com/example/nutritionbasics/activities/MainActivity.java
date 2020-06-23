@@ -3,6 +3,7 @@ package com.example.nutritionbasics.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -38,16 +39,20 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav_view);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.home, R.id.registerMeal, R.id.profile, R.id.history, R.id.evolution, R.id.info, R.id.update)
                 .setDrawerLayout(drawerLayout)
                 .build();
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setNavigationItemSelectedListener(item -> menuItemSelected(item));
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
                 new Home()).commit();

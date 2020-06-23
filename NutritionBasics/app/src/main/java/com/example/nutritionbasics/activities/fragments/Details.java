@@ -1,9 +1,8 @@
 package com.example.nutritionbasics.activities.fragments;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.ArrayMap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,11 @@ import com.example.nutritionbasics.R;
 import com.example.nutritionbasics.banco.Database;
 import com.example.nutritionbasics.model.Meal;
 import com.example.nutritionbasics.model.UserFood;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,13 +35,13 @@ public class Details extends Fragment {
     private List<UserFood> foods;
     private Map<String, Integer> foodsDetails;
 
-    private double caloriesCalc, proteinCalc, carbohydratesCalc, fatCalc;
+    private double caloriesCalc;
+    private int proteinCalc, carbohydratesCalc, fatCalc;
     private float vitaminBCalc, vitaminDCalc, vitaminACalc, vitaminCCalc, vitaminECalc, calciumCalc, ironCalc, zincCalc;
 
     public Details(int id){
         this.id = id;
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
@@ -51,48 +55,59 @@ public class Details extends Fragment {
 
         calculateMacrosAndMicros();
 
+        PieChart pieChart = view.findViewById(R.id.pieChart);
+        ArrayList calories = new ArrayList();
+
+        calories.add(new Entry(Integer.parseInt(String.valueOf(proteinCalc)), 0));
+        calories.add(new Entry(Integer.parseInt(String.valueOf(carbohydratesCalc)), 1));
+        calories.add(new Entry(Integer.parseInt(String.valueOf(fatCalc)), 2));
+        PieDataSet dataSet = new PieDataSet(calories, " - Macronutrients (cal)");
+
+        ArrayList macronutrients = new ArrayList();
+
+        macronutrients.add("Proteins");
+        macronutrients.add("Carbohydrates");
+        macronutrients.add("Fat");
+
+        PieData data = new PieData(macronutrients, dataSet);
+        pieChart.setData(data);
+
+        final int[] MY_COLORS = {Color.rgb(228, 33, 51), Color.rgb(29, 254, 130), Color.rgb(65, 139, 239)};
+        dataSet.setColors(MY_COLORS);
+        pieChart.animateXY(2000, 2000);
+
+
         final TextView detailTitle = view.findViewById(R.id.detailTitle);
-        detailTitle.setText(meal.getMealtitle() + " Details");
-
-        final TextView mealCalories = view.findViewById(R.id.mealCalories);
-        mealCalories.setText("Calories: ".concat(String.format("%.2f", caloriesCalc)).concat(" cal"));
-
-        final TextView mealProtein = view.findViewById(R.id.mealProtein);
-        mealProtein.setText("Proteins : ".concat(String.format("%.2f", proteinCalc)).concat(" cal"));
-
-        final TextView mealCarbohydrates = view.findViewById(R.id.mealCarbohydrates);
-        mealCarbohydrates.setText("Carbohydrates: ".concat(String.format("%.2f", carbohydratesCalc)).concat(" cal"));
-
-        final TextView mealFat = view.findViewById(R.id.mealFat);
-        mealFat.setText("Fat: ".concat(String.format("%.2f", fatCalc)).concat(" cal"));
+        detailTitle.setText(meal.getMealtitle() + " Details - Total Calories: ".concat(String.format("%.2f", caloriesCalc)).concat(" cal"));
 
         final TextView vitaminA = view.findViewById(R.id.mealVitaminA);
-        vitaminA.setText("Vitamin A: ".concat(String.format("%.2f", 900 - vitaminACalc).concat(" µg")));
+        vitaminA.setText("Vitamin A: ".concat(String.format("%.2f", vitaminACalc).concat(" µg")));
 
         final TextView vitaminB = view.findViewById(R.id.mealVitaminB);
-        vitaminB.setText("Vitamin B: ".concat(String.format("%.2f", 4 - vitaminBCalc).concat(" µg")));
+        vitaminB.setText("Vitamin B: ".concat(String.format("%.2f", vitaminBCalc).concat(" µg")));
 
         final TextView vitaminC = view.findViewById(R.id.mealVitaminC);
-        vitaminC.setText("Vitamin C: ".concat(String.format("%.2f", 90 - vitaminCCalc).concat(" µg")));
+        vitaminC.setText("Vitamin C: ".concat(String.format("%.2f", vitaminCCalc).concat(" µg")));
 
         final TextView vitaminD = view.findViewById(R.id.mealVitaminD);
-        vitaminD.setText("Vitamin D: ".concat(String.format("%.2f", 35 - vitaminDCalc).concat(" µg")));
+        vitaminD.setText("Vitamin D: ".concat(String.format("%.2f", vitaminDCalc).concat(" µg")));
 
         final TextView vitaminE = view.findViewById(R.id.mealVitaminE);
-        vitaminE.setText("Vitamin E: ".concat(String.format("%.2f", 15 - vitaminECalc).concat(" µg")));
+        vitaminE.setText("Vitamin E: ".concat(String.format("%.2f", vitaminECalc).concat(" µg")));
 
         final TextView calcium = view.findViewById(R.id.mealCalcium);
-        calcium.setText("Calcium: ".concat(String.format("%.2f", 1000 - calciumCalc).concat(" µg")));
+        calcium.setText("Calcium: ".concat(String.format("%.2f", calciumCalc).concat(" µg")));
 
         final TextView iron = view.findViewById(R.id.mealIron);
-        iron.setText("Iron: ".concat(String.format("%.2f", 8 - ironCalc).concat(" µg")));
+        iron.setText("Iron: ".concat(String.format("%.2f", ironCalc).concat(" µg")));
 
         final TextView zinc = view.findViewById(R.id.mealZinc);
-        zinc.setText("Zinc: ".concat(String.format("%.2f", 11 - zincCalc).concat(" µg")));
+        zinc.setText("Zinc: ".concat(String.format("%.2f", zincCalc).concat(" µg")));
 
         final TextView names = view.findViewById(R.id.mealFoods);
+
         foodsDetails.forEach((food, weight) -> {
-            names.setText(names.getText() + food + " - " + String.valueOf(weight).concat("g") + "\n");
+            names.setText(names.getText() + food + " (" + String.valueOf(weight).concat("g), "));
         });
 
         final TextView observation = view.findViewById(R.id.observation);
