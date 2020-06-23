@@ -59,7 +59,7 @@ public class History extends Fragment {
 
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getContext().getApplicationContext(), recyclerView ,
-                        (view1, position) -> getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        (view1, position) -> getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
                                 new Details(historyList.get(position).getId())).commit())
         );
     }

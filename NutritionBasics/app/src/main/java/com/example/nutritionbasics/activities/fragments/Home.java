@@ -35,6 +35,7 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
+
         bdF = new Database(getActivity().getApplicationContext());
 
         this.calculateMacrosAndMicros();
@@ -45,7 +46,7 @@ public class Home extends Fragment {
             fmt.setGroupingUsed(false);
             fmt.setMaximumIntegerDigits(9999);
             fmt.setMaximumFractionDigits(99);
-            final TextView name = (TextView) view.findViewById(R.id.welcome);
+            final TextView name = view.findViewById(R.id.welcome);
             name.setText("Welcome ".concat(String.valueOf(user.getName())).concat(("!")));
 
             final TextView calories = view.findViewById(R.id.calories);
@@ -87,13 +88,14 @@ public class Home extends Fragment {
             zinc.setText("Zinc: ".concat(String.format("%.2f", 11 - zincCalc).concat(" µg")));
 
         }
-        else getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Info()).commit();
+        else getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new Info()).commit();
 
         return view;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void calculateMacrosAndMicros(){
+        resetMacrosAndMicros();
 
         meals = new ArrayList<>();
         meals = bdF.getAllMealDay();
@@ -114,5 +116,20 @@ public class Home extends Fragment {
                 zincCalc += food.getFood().getZinc();
             });
         });
+    }
+
+    private void resetMacrosAndMicros(){
+        caloriesCalc =
+        proteinCalc =
+        carbohydratesCalc =
+        fatCalc =
+        vitaminBCalc =
+        vitaminDCalc =
+        vitaminACalc =
+        vitaminCCalc =
+        vitaminECalc =
+        calciumCalc =
+        ironCalc =
+        zincCalc = 0;
     }
 }

@@ -131,7 +131,8 @@ public class Profile extends Fragment implements AdapterView.OnItemSelectedListe
 
             //Redireciona para o fragment home
             Toast.makeText(getActivity().getApplicationContext(), "Profile Updated Successfully ", Toast.LENGTH_LONG).show();
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
+
+            getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new Home()).commit();
         });
 
         return view;

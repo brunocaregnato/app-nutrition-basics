@@ -65,7 +65,7 @@ public class RegisterMeal extends Fragment {
             _meal.setD_date(mealDate.getText().toString());
             _meal.setObservation(observation.getText().toString());
 
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new RegisterFood(_meal)).commit();
+            getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new RegisterFood(_meal)).commit();
         });
 
         return view;

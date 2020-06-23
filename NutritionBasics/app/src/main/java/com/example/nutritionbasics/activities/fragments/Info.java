@@ -21,7 +21,7 @@ public class Info extends Fragment {
         final MaterialButton save = view.findViewById(R.id.profileButton);
         save.setOnClickListener(v -> {
             //Redireciona para o fragment profile
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profile()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new Profile()).commit();
         });
 
         return view;

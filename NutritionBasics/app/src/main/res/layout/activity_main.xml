@@ -3,40 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    tools:openDrawer="end"
     android:id="@+id/drawer"
     android:background="@color/c1"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <RelativeLayout
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            android:background="@color/c1">
-        </androidx.appcompat.widget.Toolbar>
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="match_parent"
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/navigationView"
-        app:menu="@menu/menu_item"
-        app:headerLayout="@layout/header"
-        android:background="@color/c3"
         android:layout_gravity="start"
-        app:itemTextAppearance="@style/ItemStyle"
-        app:itemTextColor="#fff">
-    </com.google.android.material.navigation.NavigationView>
+        android:fitsSystemWindows="true"
+        app:menu="@menu/menu_item" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

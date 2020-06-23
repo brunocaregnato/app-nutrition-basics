@@ -1,117 +1,85 @@
 package com.example.nutritionbasics.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.ViewParent;
 import android.widget.Toast;
 
 import com.example.nutritionbasics.R;
-import com.example.nutritionbasics.activities.fragments.Evolution;
-import com.example.nutritionbasics.activities.fragments.History;
 import com.example.nutritionbasics.activities.fragments.Home;
-import com.example.nutritionbasics.activities.fragments.Info;
-import com.example.nutritionbasics.activities.fragments.Profile;
-import com.example.nutritionbasics.activities.fragments.RegisterMeal;
-import com.example.nutritionbasics.activities.fragments.Update;
 import com.example.nutritionbasics.banco.Database;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
-    NavigationView navigationView;
-    ActionBarDrawerToggle toggle;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private AppBarConfiguration mAppBarConfiguration;
+    private NavController navController;
+    private String menuOption;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Database bd = new Database(this);
 
         drawerLayout = findViewById(R.id.drawer);
-        toolbar = findViewById(R.id.toolbar);
-        navigationView = findViewById(R.id.navigationView);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView = findViewById(R.id.nav_view);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.home, R.id.registerMeal, R.id.profile, R.id.history, R.id.evolution, R.id.info, R.id.update)
+                .setDrawerLayout(drawerLayout)
+                .build();
+
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        navigationView.setNavigationItemSelectedListener(item -> menuItemSelected(item));
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
                 new Home()).commit();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+    private boolean menuItemSelected(@NonNull MenuItem menuItem) {
         Database bd = new Database(this);
+        boolean handled = false;
+        menuOption = String.valueOf(menuItem.getItemId());
+
         if(bd.getUser() == null) {
             Toast.makeText(MainActivity.this,"Register your Profile to use the app!", Toast.LENGTH_LONG).show();
         }
         else {
-            switch (menuItem.getItemId()) {
-                case R.id.home:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new Home()).commit();
-                    break;
-                case R.id.profile:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new Profile()).commit();
-                    break;
-                case R.id.registerMeal:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new RegisterMeal()).commit();
-                    break;
-                case R.id.history:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new History()).commit();
-                    break;
-                case R.id.evolution:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new Evolution()).commit();
-                    break;
-                case R.id.info:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new Info()).commit();
-                    break;
-                case R.id.update:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new Update()).commit();
-                    break;
+            handled = NavigationUI.onNavDestinationSelected(menuItem, navController);
+            if (handled) {
+                ViewParent parent = navigationView.getParent();
+                if (parent instanceof DrawerLayout) {
+                    ((DrawerLayout) parent).closeDrawer(navigationView);
+                }
             }
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        return handled;
     }
 
     @Override
-    public void onBackPressed() {
-        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
-            switch (which){
-                case DialogInterface.BUTTON_POSITIVE:
-                    super.onBackPressed();
-                    return;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    break;
-            }
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Exit Nutrition Basics?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
+
 }

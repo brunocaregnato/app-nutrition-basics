@@ -102,7 +102,7 @@ public class RegisterFood extends Fragment {
             bdF.addMeal(meal);
 
             Toast.makeText(getActivity().getApplicationContext(), "Meal registered successfully!", Toast.LENGTH_LONG).show();
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new Home()).commit();
         });
     }
 
