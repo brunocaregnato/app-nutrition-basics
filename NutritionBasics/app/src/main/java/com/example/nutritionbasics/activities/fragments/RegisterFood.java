@@ -50,6 +50,7 @@ public class RegisterFood extends Fragment {
 
         foodAddListView = view.findViewById(R.id.foodsListView);
         foodAddListView.setItemsCanFocus(true);
+        foodAddListView.setScrollBarSize(5);
 
         searchSpinner = view.findViewById(R.id.searchMultiSpinnerUnlimited);
         createSpinner();
