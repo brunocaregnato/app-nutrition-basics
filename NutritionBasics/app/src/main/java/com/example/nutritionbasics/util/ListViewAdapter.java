@@ -51,6 +51,9 @@ public class ListViewAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.food_listview_adapter, null);
 
             EditText foodWeight = convertView.findViewById(R.id.foodWeight);
+           if(list.get(position).getObject() != null) {
+               foodWeight.setText(list.get(position).getObject().toString());
+           }
 
             TextView foodName = convertView.findViewById(R.id.foodName);
             foodName.setText(list.get(position).getName());
