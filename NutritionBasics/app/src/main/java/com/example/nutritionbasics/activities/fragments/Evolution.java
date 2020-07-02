@@ -61,7 +61,6 @@ public class Evolution extends Fragment {
         BarDataSet bardataset = new BarDataSet(calories, " - Calories consumed");
         barChart.animateY(2000);
         BarData data = new BarData(days, bardataset);
-        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart.setData(data);
 
         return view;
